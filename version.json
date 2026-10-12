@@ -1,8 +1,8 @@
 {
   "version": "3.6.3",
   "notes": "🛡️ آپدیت جامع SinaVPN نسخه ۳.۶.۳:\n• پایداری فوق‌العاده و اتصال سریع پروتکل موزیلا فستلی با پل ارتباطی Netty و سوکت محافظت‌شده\n• مقادیر MTU اختصاصی و بهینه‌سازی دقیق پکت‌ها (MASQUE: 1304، WireGuard: 1290، WoW: 1290، Psiphon: 1500)\n• بازطراحی کامل بخش کشورها و ورود موزیلا با کنترل‌های سگمنت شیشه‌ای و خوانایی بالا در کیبورد\n• پشتیبانی از حالت چرخش افقی (Landscape) اختصاصی جهت تماشای ویدیو و گیمینگ\n• ارائه بسته نصبی یکپارچه یونیورسال (Universal) با سازگاری ۱۰۰٪ روی تمامی گوشی‌ها و پردازنده‌ها",
-  "download_url": "https://github.com/sinamp00/sina/releases/download/v3.6.3/SinaVPN-v3.6.3-Universal.apk",
-  "download_url_arm64": "https://github.com/sinamp00/sina/releases/download/v3.6.3/SinaVPN-v3.6.3-Universal.apk",
+  "download_url": "https://github.com/sinamp00/sinavpn/releases/download/v3.6.3/SinaVPN-v3.6.3-Universal.apk",
+  "download_url_arm64": "https://github.com/sinamp00/sinavpn/releases/download/v3.6.3/SinaVPN-v3.6.3-Universal.apk",
   "checksum": "aa397bc6f5fb071cf730c16513dcff168c0df298c7538eaf4a77a9c4a22676e0",
   "checksum_arm64": "aa397bc6f5fb071cf730c16513dcff168c0df298c7538eaf4a77a9c4a22676e0"
 }
