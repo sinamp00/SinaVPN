@@ -84,6 +84,35 @@
             background-attachment: fixed;
         }
 
+        
+        /* 3D Tilt Cards with Dynamic Specular Reflection */
+        .tilt-card {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.15s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
+            will-change: transform;
+        }
+        .tilt-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(380px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(var(--theme-primary-rgb), 0.18), transparent 75%);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .tilt-card:hover::before {
+            opacity: 1;
+        }
+
+        @media (max-width: 640px) {
+            #shield-3d-wrapper {
+                height: 380px !important;
+            }
+        }
+
         /* Glassmorphism */
         .glass-panel {
             background: rgba(12, 17, 25, 0.75);
@@ -493,7 +522,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
                 
                 <!-- Protocol 1: Mozilla Fastly -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
+                <div class="glass-panel tilt-card p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
                     <div class="flex items-center justify-between mb-4">
                         <span class="text-xs font-mono px-2.5 py-1 rounded bg-theme/10 text-theme border border-theme/30">MOZILLA FASTLY</span>
                         <span class="text-lg font-black font-mono text-white">MTU 8500</span>
@@ -510,7 +539,7 @@
                 </div>
 
                 <!-- Protocol 2: Tactical MASQUE -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
+                <div class="glass-panel tilt-card p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
                     <div class="flex items-center justify-between mb-4">
                         <span class="text-xs font-mono px-2.5 py-1 rounded bg-blue-500/10 text-blue-400 border border-blue-500/30">TACTICAL MASQUE</span>
                         <span class="text-lg font-black font-mono text-white">MTU 1304</span>
@@ -527,7 +556,7 @@
                 </div>
 
                 <!-- Protocol 3: Stealth WireGuard -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
+                <div class="glass-panel tilt-card p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
                     <div class="flex items-center justify-between mb-4">
                         <span class="text-xs font-mono px-2.5 py-1 rounded bg-purple-500/10 text-purple-400 border border-purple-500/30">WIREGUARD</span>
                         <span class="text-lg font-black font-mono text-white">MTU 1290</span>
@@ -544,7 +573,7 @@
                 </div>
 
                 <!-- Protocol 4: Shadowsocks WoW -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
+                <div class="glass-panel tilt-card p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
                     <div class="flex items-center justify-between mb-4">
                         <span class="text-xs font-mono px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30">SHADOWSOCKS WOW</span>
                         <span class="text-lg font-black font-mono text-white">MTU 1290</span>
@@ -561,7 +590,7 @@
                 </div>
 
                 <!-- Protocol 5: Psiphon Transit -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
+                <div class="glass-panel tilt-card p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
                     <div class="flex items-center justify-between mb-4">
                         <span class="text-xs font-mono px-2.5 py-1 rounded bg-rose-500/10 text-rose-400 border border-rose-500/30">PSIPHON TUNNEL</span>
                         <span class="text-lg font-black font-mono text-white">MTU 1500</span>
@@ -578,7 +607,7 @@
                 </div>
 
                 <!-- Protocol 6: Sina-Stealth Core -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
+                <div class="glass-panel tilt-card p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
                     <div class="flex items-center justify-between mb-4">
                         <span class="text-xs font-mono px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">SINA-STEALTH AUTO</span>
                         <span class="text-lg font-black font-mono text-white">تطبیقی</span>
@@ -806,7 +835,7 @@
                         <!-- Main Download Buttons -->
                         <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
                             <!-- Direct Download -->
-                            <a href="SinaVPN-v3.6.3-Universal.apk" download class="btn-cyber-primary px-6 py-4 rounded-xl text-center text-sm font-extrabold flex items-center justify-center gap-2.5 shadow-lg">
+                            <a href="https://github.com/sinamp00/sina/releases/download/v3.6.3/SinaVPN-v3.6.3-Universal.apk" download class="btn-cyber-primary px-6 py-4 rounded-xl text-center text-sm font-extrabold flex items-center justify-center gap-2.5 shadow-lg">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 <span>دانلود مستقیم فایل (سرور داخلی)</span>
                             </a>
@@ -1305,18 +1334,51 @@
             }
             animate();
 
-            // Resize Observer
-            window.addEventListener('resize', () => {
+            // Responsive Camera Framing & Resize Observer
+            function updateCameraFraming() {
                 if (!wrapper) return;
                 const width = wrapper.clientWidth;
                 const height = wrapper.clientHeight;
-                camera.aspect = width / height;
+                const aspect = width / height;
+                camera.aspect = aspect;
+                if (aspect < 1.0) {
+                    camera.position.z = 7.8 + (1.0 - aspect) * 3.8;
+                } else {
+                    camera.position.z = 7.8;
+                }
                 camera.updateProjectionMatrix();
                 renderer.setSize(width, height);
-            });
+            }
+            updateCameraFraming();
+            window.addEventListener('resize', updateCameraFraming);
         })();
 
         // ==========================================
+        
+        // ==========================================
+        // 3D Card Tilt & Specular Physics
+        // ==========================================
+        (function initCardTilt() {
+            const cards = document.querySelectorAll('.tilt-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -7;
+                    const rotateY = ((x - centerX) / centerX) * 7;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                });
+            });
+        })();
+
         // 4. Live Ping Test Simulation
         // ==========================================
         const SERVERS = [
