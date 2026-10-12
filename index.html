@@ -3,13 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <title>SinaVPN v3.6.3 | سامانه نسل نوین استتار شبکه و ارتباط پایدار</title>
-    <meta name="description" content="پایگاه رسمی SinaVPN نسخه ۳.۶.۳ یونیورسال - مجهز به ۶ موتور پیشرفته استتار، موزیلا فستلی، مسک تاکتیکی، وایرگارد و شبیه‌ساز سه‌بعدی تعاملی.">
-    <meta name="theme-color" content="#06090e">
-    
+    <title>SinaVPN | اینترنت آزاد، خصوصی و بدون محدودیت</title>
+    <meta name="description" content="SinaVPN - فیلترشکن رایگان، بدون تبلیغات و بدون لاگ برای اندروید. دسترسی به اینترنت آزاد با ۵۰ گیگابایت ترافیک ماهانه موزیلا، پروتکل‌های پیشرفته ضد فیلترینگ و پکیج یکپارچه یونیورسال.">
+    <meta name="theme-color" content="#080b11">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" href="logo-transparent.png">
+    <link rel="shortcut icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+
     <!-- Open Graph & Twitter -->
-    <meta property="og:title" content="SinaVPN v3.6.3 Universal - سامانه استتار ترافیک و شبکه پایدار">
-    <meta property="og:description" content="دانلود نسخه نهایی یونیورسال ۳.۶.۳ با سازگاری ۱۰۰٪، پروتکل موزیلا فستلی با هسته Netty، مسک تاکتیکی و استتار هوشمند.">
+    <meta property="og:title" content="SinaVPN - حریم خصوصی واقعی و اینترنت بدون سانسور">
+    <meta property="og:description" content="دانلود رایگان نسخه ۳.۶.۳ یونیورسال SinaVPN برای تمامی گوشی‌های اندروید. ۵۰ گیگابایت ترافیک ابری موزیلا، بدون ثبت‌نام و بدون تبلیغات.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="logo.png">
 
@@ -26,14 +33,17 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Vazirmatn', 'system-ui', '-apple-system', 'sans-serif'],
+                        sans: ['Vazirmatn', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
                     },
                     colors: {
-                        cyber: {
-                            base: '#06090e',
-                            surface: '#0c1119',
-                            card: '#111827',
+                        wind: {
+                            base: '#080B11',
+                            surface: '#0F1523',
+                            card: '#141D30',
                             border: 'rgba(255, 255, 255, 0.08)',
+                            emerald: '#00F5A0',
+                            emeraldDark: '#05DF96',
+                            cyan: '#00D8F6',
                         }
                     }
                 }
@@ -41,13 +51,7 @@
         }
     </script>
 
-    <!-- Local / Fallback CDN Libraries -->
-    <script src="three.min.js"></script>
-    <script>
-        if (typeof THREE === 'undefined') {
-            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
-        }
-    </script>
+    <!-- QR Code Generator -->
     <script src="qrcode.min.js"></script>
     <script>
         if (typeof QRCode === 'undefined') {
@@ -57,13 +61,9 @@
 
     <style>
         :root {
-            --theme-primary: #00F5A0;
-            --theme-primary-rgb: 0, 245, 160;
-            --theme-secondary: #00F0FF;
-            --theme-secondary-rgb: 0, 240, 255;
-            --theme-glow: rgba(0, 245, 160, 0.35);
-            --theme-bg-glow: rgba(0, 245, 160, 0.04);
-            --theme-border: rgba(0, 245, 160, 0.25);
+            --emerald: #00F5A0;
+            --emerald-glow: rgba(0, 245, 160, 0.25);
+            --bg-dark: #080B11;
         }
 
         * {
@@ -72,1556 +72,512 @@
         }
 
         body {
-            font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #06090e;
-            color: #e2e8f0;
+            font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background-color: #080B11;
+            color: #E2E8F0;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 50% 0%, var(--theme-bg-glow) 0%, transparent 60%),
-                radial-gradient(circle at 10% 30%, rgba(0, 240, 255, 0.03) 0%, transparent 40%),
-                radial-gradient(circle at 90% 70%, var(--theme-bg-glow) 0%, transparent 50%),
-                linear-gradient(to bottom, #06090e, #0a0e17 50%, #06090e);
+                radial-gradient(circle at 50% 0%, rgba(0, 245, 160, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 85% 25%, rgba(0, 216, 246, 0.04) 0%, transparent 45%);
             background-attachment: fixed;
         }
 
-        
-        /* 3D Tilt Cards with Dynamic Specular Reflection */
-        .tilt-card {
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.15s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
-            will-change: transform;
-        }
-        .tilt-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: radial-gradient(380px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(var(--theme-primary-rgb), 0.18), transparent 75%);
-            opacity: 0;
-            transition: opacity 0.25s ease;
-            pointer-events: none;
-            z-index: 10;
-        }
-        .tilt-card:hover::before {
-            opacity: 1;
+        /* Windscribe Glassmorphism & Cards */
+        .wind-nav {
+            background: rgba(8, 11, 17, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
         }
 
-        @media (max-width: 640px) {
-            #shield-3d-wrapper {
-                height: 380px !important;
-            }
-        }
-
-        /* Glassmorphism */
-        .glass-panel {
-            background: rgba(12, 17, 25, 0.75);
+        .wind-card {
+            background: rgba(15, 21, 35, 0.7);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--theme-border);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .glass-panel-subtle {
-            background: rgba(17, 24, 39, 0.6);
+        .wind-card:hover {
+            border-color: rgba(0, 245, 160, 0.35);
+            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), 0 0 30px -5px rgba(0, 245, 160, 0.15);
+            transform: translateY(-3px);
+        }
+
+        /* Windscribe App Window Mockup */
+        .wind-app-mockup {
+            background: linear-gradient(180deg, #101726 0%, #0A0F1A 100%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 36px;
+            box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.9), 0 0 50px -10px rgba(0, 245, 160, 0.2);
+        }
+
+        /* Connection Orb Power Switch */
+        .power-orb {
+            background: radial-gradient(circle at 35% 30%, #1A2E28 0%, #0D1C17 70%, #07120E 100%);
+            border: 2px solid rgba(0, 245, 160, 0.4);
+            box-shadow: 0 0 35px rgba(0, 245, 160, 0.35), inset 0 0 20px rgba(0, 245, 160, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .power-orb:hover {
+            border-color: #00F5A0;
+            box-shadow: 0 0 50px rgba(0, 245, 160, 0.6), inset 0 0 25px rgba(0, 245, 160, 0.35);
+            transform: scale(1.03);
+        }
+
+        /* Windscribe Bold Buttons */
+        .btn-wind-primary {
+            background: #00F5A0;
+            color: #080B11;
+            font-weight: 800;
+            box-shadow: 0 4px 20px rgba(0, 245, 160, 0.35);
+            transition: transform 0.12s ease-out, box-shadow 0.15s ease-out;
+        }
+
+        .btn-wind-primary:hover {
+            box-shadow: 0 6px 28px rgba(0, 245, 160, 0.55);
+            transform: translateY(-1px);
+        }
+
+        .btn-wind-primary:active {
+            transform: scale(0.97);
+        }
+
+        .btn-wind-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.15s ease-out;
         }
 
-        .glass-glow {
-            box-shadow: 0 0 35px -5px var(--theme-glow);
+        .btn-wind-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
         }
 
-        /* Dynamic Theme Text & Border */
-        .text-theme { color: var(--theme-primary) !important; }
-        .bg-theme { background-color: var(--theme-primary) !important; }
-        .border-theme { border-color: var(--theme-primary) !important; }
-        .ring-theme { --tw-ring-color: var(--theme-primary) !important; }
-
-        /* Cyber Button */
-        .btn-cyber-primary {
-            background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-secondary) 100%);
-            color: #06090e;
-            font-weight: 700;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 0 25px var(--theme-glow);
-        }
-        .btn-cyber-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 35px var(--theme-glow), 0 0 15px rgba(255, 255, 255, 0.2);
-            filter: brightness(1.08);
-        }
-        .btn-cyber-primary:active {
-            transform: translateY(0);
+        .btn-wind-secondary:active {
+            transform: scale(0.97);
         }
 
-        /* Neon Border Pulse */
-        @keyframes borderPulse {
-            0%, 100% { border-color: var(--theme-border); }
-            50% { border-color: var(--theme-primary); }
-        }
-        .pulse-border {
-            animation: borderPulse 3s infinite ease-in-out;
+        /* Windscribe Tag Pill */
+        .wind-pill {
+            background: rgba(0, 245, 160, 0.08);
+            border: 1px solid rgba(0, 245, 160, 0.25);
+            color: #00F5A0;
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
-            height: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #06090e;
+            background: #080B11;
         }
         ::-webkit-scrollbar-thumb {
-            background: #1e293b;
+            background: #1C2638;
             border-radius: 4px;
-            border: 1px solid var(--theme-border);
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--theme-primary);
-        }
-
-        /* 3D Canvas Container */
-        #shield-3d-wrapper {
-            position: relative;
-            width: 100%;
-            height: 520px;
-            border-radius: 24px;
-            overflow: hidden;
-            background: radial-gradient(circle at center, rgba(12, 17, 25, 0.9) 0%, rgba(6, 9, 14, 0.95) 100%);
-            border: 1px solid var(--theme-border);
-            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8), 0 15px 40px rgba(0, 0, 0, 0.6);
-        }
-        #shield-canvas {
-            width: 100%;
-            height: 100%;
-            display: block;
-            cursor: grab;
-        }
-        #shield-canvas:active {
-            cursor: grabbing;
-        }
-
-        /* Toast notification */
-        #toast-notification {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            opacity: 0;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 9999;
-            pointer-events: none;
-        }
-        #toast-notification.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        /* Glowing Dot */
-        .glow-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--theme-primary);
-            box-shadow: 0 0 10px var(--theme-primary);
-        }
-
-        /* Grid Background Pattern */
-        .cyber-grid {
-            background-size: 40px 40px;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background: #00F5A0;
         }
     </style>
 </head>
-<body class="cyber-grid antialiased selection:bg-[#00F5A0] selection:text-[#06090e]">
+<body class="selection:bg-emerald-500 selection:text-black">
 
-    <!-- Toast Notification -->
-    <div id="toast-notification" class="glass-panel px-6 py-3 rounded-xl border border-theme flex items-center gap-3 text-sm font-semibold shadow-2xl">
-        <span id="toast-icon" class="text-theme text-lg">✓</span>
-        <span id="toast-message" class="text-white">متن با موفقیت کپی شد</span>
-    </div>
-
-    <!-- Navigation Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 px-4 py-3 sm:px-8">
-        <nav class="max-w-7xl mx-auto glass-panel rounded-2xl px-5 py-3 flex items-center justify-between border border-white/10 shadow-lg">
-            <!-- Brand Logo -->
-            <a href="#hero" class="flex items-center gap-3 group">
-                <div class="relative w-10 h-10 rounded-xl overflow-hidden p-1 bg-gradient-to-br from-white/10 to-transparent border border-theme/40 group-hover:border-theme transition-all duration-300">
-                    <img src="logo-transparent.png" alt="SinaVPN Logo" class="w-full h-full object-contain filter drop-shadow group-hover:scale-105 transition-transform">
-                </div>
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="font-extrabold text-xl tracking-tight text-white group-hover:text-theme transition-colors">SinaVPN</span>
-                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-theme/20 text-theme border border-theme/40">v3.6.3</span>
-                    </div>
-                    <span class="text-[11px] text-gray-400 block -mt-0.5">معماری استتار چندلایه</span>
+    <!-- ========================================== -->
+    <!-- 1. Windscribe Translucent Header Nav       -->
+    <!-- ========================================== -->
+    <header class="wind-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 h-18 py-3.5 flex items-center justify-between">
+            
+            <!-- Logo & Brand -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="logo-transparent.png" alt="SinaVPN Logo" class="w-10 h-10 object-contain drop-shadow-[0_0_12px_rgba(0,245,160,0.5)] transition-transform duration-300 group-hover:scale-105">
+                <div class="flex flex-col">
+                    <span class="text-lg font-black tracking-tight text-white group-hover:text-[#00F5A0] transition-colors">SinaVPN</span>
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Free & Unlimited</span>
                 </div>
             </a>
 
-            <!-- Nav Links -->
-            <div class="hidden lg:flex items-center gap-7 text-sm font-medium text-gray-300">
-                <a href="#hero-3d" class="hover:text-theme transition-colors">نشان سه‌بعدی</a>
-                <a href="#features" class="hover:text-theme transition-colors">نوآوری‌های ۳.۶.۳</a>
-                <a href="#protocols" class="hover:text-theme transition-colors">آزمایشگاه پروتکل‌ها و MTU</a>
-                <a href="#simulator" class="hover:text-theme transition-colors">شبیه‌ساز اپلیکیشن</a>
-                <a href="#themes" class="hover:text-theme transition-colors">۱۵ پوسته رنگی</a>
-                <a href="#security" class="hover:text-theme transition-colors">امنیت و لایسنس</a>
-            </div>
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-300">
+                <a href="#features" class="hover:text-[#00F5A0] transition-colors">قابلیت‌ها</a>
+                <a href="#why-sinavpn" class="hover:text-[#00F5A0] transition-colors">چرا سینا وی‌پی‌ان؟</a>
+                <a href="#install-guide" class="hover:text-[#00F5A0] transition-colors">راهنمای نصب</a>
+                <a href="https://github.com/sinamp00/sina/releases" target="_blank" rel="noopener noreferrer" class="hover:text-[#00F5A0] transition-colors">تاریخچه نسخه‌ها</a>
+            </nav>
 
-            <!-- Header Action CTA -->
+            <!-- Quick Action CTA -->
             <div class="flex items-center gap-3">
-                <!-- Sound Toggle Button -->
-                <button id="sound-toggle-btn" class="p-2.5 rounded-xl glass-panel-subtle hover:border-theme/40 text-gray-400 hover:text-white transition-all text-xs flex items-center gap-1.5" title="جلوه‌های صوتی سایبری">
-                    <span id="sound-icon">🔇</span>
-                    <span class="hidden sm:inline text-[11px]">صدا</span>
-                </button>
-
-                <!-- Primary Download Button -->
-                <a href="#download" class="btn-cyber-primary px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2">
+                <a href="#download" class="btn-wind-primary px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold flex items-center gap-2 shadow-sm">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                    <span>دانلود یونیورسال</span>
+                    <span>دانلود رایگان v3.6.3</span>
                 </a>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="relative pt-28 sm:pt-36">
+    <main class="pt-28 sm:pt-36">
 
-        <!-- ==================== HERO SECTION ==================== -->
-        <section id="hero" class="max-w-7xl mx-auto px-4 sm:px-8 pb-20">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- ========================================== -->
+        <!-- 2. Windscribe-Style Hero Section           -->
+        <!-- ========================================== -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-8 pt-6 pb-24">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
                 
-                <!-- Hero Content (Right in RTL) -->
-                <div class="lg:col-span-6 space-y-6 text-right">
-                    <!-- Eyebrow Badge -->
-                    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass-panel border border-theme/40 text-xs text-theme font-medium shadow-sm">
-                        <span class="glow-dot animate-pulse"></span>
-                        <span>نسخه رسمی ۳.۶.۳ یونیورسال • پایداری فراتر از انتظار</span>
+                <!-- Left Column: Bold Copy & CTAs -->
+                <div class="lg:col-span-7 text-center lg:text-right space-y-7">
+                    
+                    <!-- Top Pill -->
+                    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full wind-pill text-xs font-bold shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-[#00F5A0] animate-pulse"></span>
+                        <span>نسخه جدید ۳.۶.۳ منتشر شد • ۱۰۰٪ رایگان و بدون تبلیغ</span>
                     </div>
 
-                    <!-- Main Headline -->
-                    <h1 class="text-3xl sm:text-5xl lg:text-5xl font-black leading-tight sm:leading-snug text-white tracking-tight">
-                        استتار نهایی ترافیک با <span class="text-theme drop-shadow-sm">معماری چندلایه</span> SinaVPN
+                    <!-- Main Catchy Title (Windscribe Vibe) -->
+                    <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight leading-[1.15]">
+                        اینترنت را همان‌گونه که باید باشد تجربه کنید: <span class="text-[#00F5A0]">آزاد، امن و بی‌پایان.</span>
                     </h1>
 
-                    <!-- Description -->
-                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
-                        سامانه پیشرفته استتار شبکه اینترنت پایدار، مجهز به ۶ موتور ارتباطی هوشمند، پروتکل اختصاصی موزیلا فستلی با هسته سوکت محافظت‌شده Netty، تنظیمات مهندسی‌شده پکت‌ها و یک فایل نصبی واحد یونیورسال برای تمامی پردازنده‌ها.
+                    <!-- Punchy Subhead -->
+                    <p class="text-base sm:text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal">
+                        ردیاب‌ها را متوقف کنید، فیلترینگ شدید را پشت سر بگذارید و به وب آزاد بازگردید. با ۵۰ گیگابایت ترافیک ابری ماهانه موزیلا، رمزنگاری آفلاین و بدون نیاز به ثبت ایمیل یا شماره موبایل.
                     </p>
 
-                    <!-- Key Technical Badges -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-                        <div class="glass-panel-subtle p-3 rounded-xl text-center border border-white/5">
-                            <span class="text-xs text-gray-400 block">پینگ Anycast</span>
-                            <span class="text-base font-extrabold text-theme">۴۸ میلی‌ثانیه</span>
-                        </div>
-                        <div class="glass-panel-subtle p-3 rounded-xl text-center border border-white/5">
-                            <span class="text-xs text-gray-400 block">موتورهای استتار</span>
-                            <span class="text-base font-extrabold text-white">۶ پروتکل هوشمند</span>
-                        </div>
-                        <div class="glass-panel-subtle p-3 rounded-xl text-center border border-white/5">
-                            <span class="text-xs text-gray-400 block">معماری بسته</span>
-                            <span class="text-base font-extrabold text-theme">یونیورسال ۱۰۰٪</span>
-                        </div>
-                        <div class="glass-panel-subtle p-3 rounded-xl text-center border border-white/5">
-                            <span class="text-xs text-gray-400 block">ثبت فعالیت</span>
-                            <span class="text-base font-extrabold text-white">صفر لاگ (No-Log)</span>
-                        </div>
-                    </div>
-
-                    <!-- Direct Action CTAs -->
-                    <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                        <a href="#download" class="btn-cyber-primary px-7 py-3.5 rounded-xl text-center text-sm font-bold flex items-center justify-center gap-2">
+                    <!-- CTAs & Mirrors -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <!-- Primary APK Download -->
+                        <a href="https://github.com/sinamp00/sina/releases/download/v3.6.3/SinaVPN-v3.6.3-Universal.apk" download class="btn-wind-primary w-full sm:w-auto px-8 py-4 rounded-2xl text-sm font-extrabold flex items-center justify-center gap-3">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                            <span>دانلود نسخه یونیورسال (۶۸.۸ MB)</span>
+                            <span>دریافت مستقیم SinaVPN برای اندروید</span>
                         </a>
-                        <button onclick="openQrModal()" class="glass-panel hover:border-theme/60 text-white px-5 py-3.5 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2">
-                            <svg class="w-5 h-5 text-theme" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
-                            <span>اسکن بارکد گوشی (QR Code)</span>
-                        </button>
+
+                        <!-- Telegram Mirror -->
+                        <a href="https://t.me/sinavpn_channel" target="_blank" rel="noopener noreferrer" class="btn-wind-secondary w-full sm:w-auto px-6 py-4 rounded-2xl text-sm font-bold flex items-center justify-center gap-2.5 text-blue-400 border-blue-500/20 hover:border-blue-500/40">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                            <span>دانلود از کانال تلگرام</span>
+                        </a>
                     </div>
 
-                    <!-- Hash & Verifiability Quick Row -->
-                    <div class="pt-2 flex items-center gap-3 text-xs text-gray-400">
-                        <span>کد اصالت SHA-256:</span>
-                        <code class="font-mono text-[11px] text-gray-300 bg-white/5 px-2 py-1 rounded border border-white/10 truncate max-w-[200px] sm:max-w-[260px]">aa397bc6f5fb071cf730c16513dcff168c0df298c7538eaf4a77a9c4a22676e0</code>
-                        <button onclick="copyHash()" class="text-theme hover:underline font-bold text-xs" title="کپی هش">کپی</button>
+                    <!-- Trust Points -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-6 pt-3 text-xs text-gray-400 font-medium">
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-4 h-4 text-[#00F5A0]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            بدون نیاز به ثبت‌نام یا ایمیل
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-4 h-4 text-[#00F5A0]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            بدون تبلیغات آزاردهنده
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-4 h-4 text-[#00F5A0]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            سازگار با تمامی پردازنده‌ها
+                        </span>
                     </div>
+
                 </div>
 
-                <!-- 3D Interactive Viewport (Left in RTL) -->
-                <div class="lg:col-span-6" id="hero-3d">
-                    <div class="relative">
-                        <!-- Holographic Ambient Ring behind canvas -->
-                        <div class="absolute -inset-4 bg-gradient-to-r from-theme/20 via-cyan-500/10 to-theme/20 rounded-3xl blur-2xl opacity-60"></div>
-
-                        <!-- 3D Viewport Box -->
-                        <div id="shield-3d-wrapper" class="relative group">
-                            <!-- Three.js Canvas -->
-                            <canvas id="shield-canvas"></canvas>
-
-                            <!-- Overlay Control Badges -->
-                            <div class="absolute top-4 right-4 flex items-center gap-2 pointer-events-none">
-                                <span class="px-2.5 py-1 rounded-lg glass-panel text-[11px] font-mono text-theme border border-theme/30 flex items-center gap-1.5 shadow">
-                                    <span class="w-2 h-2 rounded-full bg-theme animate-ping"></span>
-                                    <span>3D WEBGL LIVE</span>
-                                </span>
-                            </div>
-
-                            <!-- Interactive 3D Control Bar (Bottom of 3D Canvas) -->
-                            <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between p-2 rounded-xl glass-panel border border-white/10 text-xs z-10">
-                                <div class="flex items-center gap-2">
-                                    <button id="btn-3d-rotate" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white font-medium transition-all" title="تغییر حالت چرخش خودکار">
-                                        چرخش خودکار: <span id="rotate-status" class="text-theme">روشن</span>
-                                    </button>
-                                    <button id="btn-3d-burst" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-theme font-medium transition-all" title="ایجاد موج تشعشعی">
-                                        تخلیه انرژی ⚡
-                                    </button>
-                                </div>
-                                <div class="text-[11px] text-gray-400 hidden sm:block">
-                                    نشان را بکشید یا لمس کنید
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="features" class="max-w-7xl mx-auto px-4 sm:px-8 py-20 border-t border-white/5">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel text-xs text-theme border border-theme/30 font-semibold">
-                    <span>✨ مهندسی بازطراحی‌شده</span>
-                </div>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                    نوآوری‌ها و جهش عملکرد در <span class="text-theme">نسخه ۳.۶.۳</span>
-                </h2>
-                <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
-                    هر خط از کدهای ارتباطی، لایه‌های رمزنگاری و اجزای رابط کاربری با هدف تاب‌آوری حداکثری و تجربه کاربری نرم و بی‌نقص بازنویسی شده‌اند.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <!-- Card 1: Mozilla Fastly Netty -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all duration-300 group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-theme/10 border border-theme/30 flex items-center justify-center text-theme text-xl mb-5 group-hover:scale-110 transition-transform">
-                        🌐
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2 group-hover:text-theme transition-colors">موتور پرسرعت موزیلا با سوکت Netty</h3>
-                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4">
-                        ارتباط مستقیم و ایمن از طریق پل ارتباطی موزیلا فستلی بر بستر سوکت محافظت‌شده Netty با MTU 8500، برقراری اتصال زیر ۲ ثانیه و عبور بی‌درنگ از سدهای فیلترینگ.
-                    </p>
-                    <div class="flex items-center justify-between text-[11px] text-gray-500 font-mono border-t border-white/5 pt-3">
-                        <span>پروتکل: Mozilla Fastly</span>
-                        <span class="text-theme font-bold">MTU: 8500</span>
-                    </div>
-                </div>
-
-                <!-- Card 2: Precision MTU & Packet Fragmentation -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all duration-300 group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-theme/10 border border-theme/30 flex items-center justify-center text-theme text-xl mb-5 group-hover:scale-110 transition-transform">
-                        🧩
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2 group-hover:text-theme transition-colors">تنظیم مهندسی‌شده MTU پکت‌ها</h3>
-                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4">
-                        محاسبه اختصاصی بایت‌های MTU برای هر پروتکل (مسک ۱۳۰۴، وایرگارد ۱۲۹۰، وو ۱۲۹۰، سایفون ۱۵۰۰) جهت جلوگیری از Drop شدن بسته‌ها در مسیر بازرسی عمیق پکت (DPI).
-                    </p>
-                    <div class="flex items-center justify-between text-[11px] text-gray-500 font-mono border-t border-white/5 pt-3">
-                        <span>استتار پکت: ۱۶-۳۲ بایت</span>
-                        <span class="text-theme font-bold">تکه‌تکه‌سازی پیشرفته</span>
-                    </div>
-                </div>
-
-                <!-- Card 3: Landscape Mode Support -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all duration-300 group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-theme/10 border border-theme/30 flex items-center justify-center text-theme text-xl mb-5 group-hover:scale-110 transition-transform">
-                        📱
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2 group-hover:text-theme transition-colors">حالت چرخش افقی (Landscape Mode)</h3>
-                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4">
-                        طراحی رابط کاربری بهینه برای چرخاندن گوشی به حالت افقی، ویژه گیمرها، استریمرها و تماشای تمام‌صفحه فیلم بدون خارج شدن از استایل بصری اپلیکیشن.
-                    </p>
-                    <div class="flex items-center justify-between text-[11px] text-gray-500 font-mono border-t border-white/5 pt-3">
-                        <span>زاویه نمایش: افقی و عمودی</span>
-                        <span class="text-theme font-bold">تطبیق خودکار</span>
-                    </div>
-                </div>
-
-                <!-- Card 4: Universal APK Deployment -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all duration-300 group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-theme/10 border border-theme/30 flex items-center justify-center text-theme text-xl mb-5 group-hover:scale-110 transition-transform">
-                        📦
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2 group-hover:text-theme transition-colors">بسته فراگیر یونیورسال (Universal)</h3>
-                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4">
-                        حذف سردرگمی انتخاب معماری؛ یک بسته نصبی بهینه‌شده شامل تمامی کتابخانه‌های باینری برای نصب بی‌دردسر روی ۱۰۰٪ گوشی‌ها و تبلت‌های هوشمند اندروید.
-                    </p>
-                    <div class="flex items-center justify-between text-[11px] text-gray-500 font-mono border-t border-white/5 pt-3">
-                        <span>پوشش پردازنده‌ها: ARM64 + v7 + x86</span>
-                        <span class="text-theme font-bold">۱۰۰٪ سازگار</span>
-                    </div>
-                </div>
-
-                <!-- Card 5: Clean Anycast Discovery -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all duration-300 group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-theme/10 border border-theme/30 flex items-center justify-center text-theme text-xl mb-5 group-hover:scale-110 transition-transform">
-                        ⚡
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2 group-hover:text-theme transition-colors">کاوشگر Anycast رله‌های تمیز</h3>
-                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4">
-                        پایش پیوسته درگاه‌های اختصاصی (مانند ۸۵۴، ۸۸۴ و ۹۰۸) بر روی آی‌پی‌های Anycast پاک بدون وابستگی به پورت‌های مسدودشده عمومی ۴۴۳.
-                    </p>
-                    <div class="flex items-center justify-between text-[11px] text-gray-500 font-mono border-t border-white/5 pt-3">
-                        <span>درگاه‌ها: ۸۵۴ | ۸۸۴ | ۹۰۸</span>
-                        <span class="text-theme font-bold">تاخیر حداقلی</span>
-                    </div>
-                </div>
-
-                <!-- Card 6: Cryptographic HWID Vault -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all duration-300 group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-theme/10 border border-theme/30 flex items-center justify-center text-theme text-xl mb-5 group-hover:scale-110 transition-transform">
-                        🔐
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2 group-hover:text-theme transition-colors">صندوقچه ماندگار لایسنس و HWID</h3>
-                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4">
-                        اعتبارسنجی آفلاین کلیدها با رمزنگاری پیشرفته منحنی بیضوی ECDSA NIST P-256 و ذخیره‌سازی سخت‌افزاری امن بدون از دست رفتن با کلیر دیتا.
-                    </p>
-                    <div class="flex items-center justify-between text-[11px] text-gray-500 font-mono border-t border-white/5 pt-3">
-                        <span>الگوریتم: ECDSA NIST P-256</span>
-                        <span class="text-theme font-bold">آفلاین و امن</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="protocols" class="max-w-7xl mx-auto px-4 sm:px-8 py-20 border-t border-white/5">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel text-xs text-theme border border-theme/30 font-semibold">
-                    <span>🔬 آزمایشگاه فنی ترافیک</span>
-                </div>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                    معماری پروتکل‌ها و تنظیمات دقیق <span class="text-theme">MTU</span>
-                </h2>
-                <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
-                    در محیط‌های پالایش ترافیک و شبکه فیلترینگ، اندازه و ساختار پکت حیاتی‌ترین شاخص اتصال است. مقادیر MTU در نسخه ۳.۶.۳ با دقت بایت‌به‌بایت بهینه‌سازی شده‌اند.
-                </p>
-            </div>
-
-            <!-- MTU Technical Matrix -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-                
-                <!-- Protocol 1: Mozilla Fastly -->
-                <div class="glass-panel tilt-card p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-mono px-2.5 py-1 rounded bg-theme/10 text-theme border border-theme/30">MOZILLA FASTLY</span>
-                        <span class="text-lg font-black font-mono text-white">MTU 8500</span>
-                    </div>
-                    <h4 class="font-bold text-white text-base mb-2">موزیلا فستلی سوکت Netty</h4>
-                    <p class="text-gray-400 text-xs leading-relaxed mb-4">
-                        اتصال به شبکه توزیع محتوای فوق‌سریع Fastly با هندشیک محافظت‌شده و بدون مسدودی UDP. پایداری طولانی‌مدت در سخت‌ترین اختلالات شبکه.
-                    </p>
-                    <div class="space-y-1.5 text-[11px] text-gray-400 font-mono bg-black/30 p-2.5 rounded-lg border border-white/5">
-                        <div class="flex justify-between"><span>بستر لایه انتقال:</span><span class="text-white">Protected Netty Socket</span></div>
-                        <div class="flex justify-between"><span>سایز بافر:</span><span class="text-theme font-bold">۸۵۰۰ بایت</span></div>
-                        <div class="flex justify-between"><span>تاخیر اتصال:</span><span class="text-green-400">زیر ۲.۱ ثانیه</span></div>
-                    </div>
-                </div>
-
-                <!-- Protocol 2: Tactical MASQUE -->
-                <div class="glass-panel tilt-card p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-mono px-2.5 py-1 rounded bg-blue-500/10 text-blue-400 border border-blue-500/30">TACTICAL MASQUE</span>
-                        <span class="text-lg font-black font-mono text-white">MTU 1304</span>
-                    </div>
-                    <h4 class="font-bold text-white text-base mb-2">مسک تاکتیکی HTTP/2 و HTTP/3</h4>
-                    <p class="text-gray-400 text-xs leading-relaxed mb-4">
-                        تونل‌سازی مدرن تحت پروتکل HTTP/2 و پورت‌های اختصاصی Anycast رله‌های تمیز ایران (۸۵۴، ۸۸۴ و ۹۰۸) با فرگمنت پکت ۱۶-۳۲ بایت.
-                    </p>
-                    <div class="space-y-1.5 text-[11px] text-gray-400 font-mono bg-black/30 p-2.5 rounded-lg border border-white/5">
-                        <div class="flex justify-between"><span>درگاه‌های هدف:</span><span class="text-white">854, 884, 908</span></div>
-                        <div class="flex justify-between"><span>مقدار MTU:</span><span class="text-theme font-bold">۱۳۰۴ بایت</span></div>
-                        <div class="flex justify-between"><span>ضد مسدودسازی:</span><span class="text-green-400">تکه‌تکه‌سازی هدر</span></div>
-                    </div>
-                </div>
-
-                <!-- Protocol 3: Stealth WireGuard -->
-                <div class="glass-panel tilt-card p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-mono px-2.5 py-1 rounded bg-purple-500/10 text-purple-400 border border-purple-500/30">WIREGUARD</span>
-                        <span class="text-lg font-black font-mono text-white">MTU 1290</span>
-                    </div>
-                    <h4 class="font-bold text-white text-base mb-2">وایرگارد با اندازه پکت اختصاصی</h4>
-                    <p class="text-gray-400 text-xs leading-relaxed mb-4">
-                        بهینه‌سازی شده برای استتار امضای وایرگارد، کاهش افت پکت بر روی خطوط اپراتورهای همراه و پایداری بالا در زمان افت پهنای باند.
-                    </p>
-                    <div class="space-y-1.5 text-[11px] text-gray-400 font-mono bg-black/30 p-2.5 rounded-lg border border-white/5">
-                        <div class="flex justify-between"><span>رمزنگاری:</span><span class="text-white">ChaCha20-Poly1305</span></div>
-                        <div class="flex justify-between"><span>مقدار MTU:</span><span class="text-theme font-bold">۱۲۹۰ بایت</span></div>
-                        <div class="flex justify-between"><span>مقاومت نویز:</span><span class="text-green-400">Noise Protocol Guard</span></div>
-                    </div>
-                </div>
-
-                <!-- Protocol 4: Shadowsocks WoW -->
-                <div class="glass-panel tilt-card p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-mono px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30">SHADOWSOCKS WOW</span>
-                        <span class="text-lg font-black font-mono text-white">MTU 1290</span>
-                    </div>
-                    <h4 class="font-bold text-white text-base mb-2">تونل سبک و پرسرعت WoW</h4>
-                    <p class="text-gray-400 text-xs leading-relaxed mb-4">
-                        ساختار هدر مینیمال برای ارسال پکت‌های بدون الگو و نوسان، مناسب پینگ پایین گیمینگ و ارتباط صوتی بدون تاخیر.
-                    </p>
-                    <div class="space-y-1.5 text-[11px] text-gray-400 font-mono bg-black/30 p-2.5 rounded-lg border border-white/5">
-                        <div class="flex justify-between"><span>کاربرد اصلی:</span><span class="text-white">گیمینگ و استریم</span></div>
-                        <div class="flex justify-between"><span>مقدار MTU:</span><span class="text-theme font-bold">۱۲۹۰ بایت</span></div>
-                        <div class="flex justify-between"><span>سربار هدر:</span><span class="text-green-400">حداقل (زیر ۰.۱٪)</span></div>
-                    </div>
-                </div>
-
-                <!-- Protocol 5: Psiphon Transit -->
-                <div class="glass-panel tilt-card p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-mono px-2.5 py-1 rounded bg-rose-500/10 text-rose-400 border border-rose-500/30">PSIPHON TUNNEL</span>
-                        <span class="text-lg font-black font-mono text-white">MTU 1500</span>
-                    </div>
-                    <h4 class="font-bold text-white text-base mb-2">شبکه ترانزیت جهانی سایفون</h4>
-                    <p class="text-gray-400 text-xs leading-relaxed mb-4">
-                        شبکه قدرتمند چندمسیری با MTU استاندارد ۱۵۰۰ بایت برای عبور از فیلترینگ شدید در بحرانی‌ترین شرایط ملی اینترنت.
-                    </p>
-                    <div class="space-y-1.5 text-[11px] text-gray-400 font-mono bg-black/30 p-2.5 rounded-lg border border-white/5">
-                        <div class="flex justify-between"><span>استراتژی ترانزیت:</span><span class="text-white">Multi-Hop Mesh</span></div>
-                        <div class="flex justify-between"><span>مقدار MTU:</span><span class="text-theme font-bold">۱۵۰۰ بایت</span></div>
-                        <div class="flex justify-between"><span>سازگاری جهانی:</span><span class="text-green-400">حداکثر پوشش</span></div>
-                    </div>
-                </div>
-
-                <!-- Protocol 6: Sina-Stealth Core -->
-                <div class="glass-panel tilt-card p-6 rounded-2xl border border-white/10 hover:border-theme/40 transition-all">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-mono px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">SINA-STEALTH AUTO</span>
-                        <span class="text-lg font-black font-mono text-white">تطبیقی</span>
-                    </div>
-                    <h4 class="font-bold text-white text-base mb-2">هوش مصنوعی استتار سینا</h4>
-                    <p class="text-gray-400 text-xs leading-relaxed mb-4">
-                        سوییچ خودکار بین فاز ۱ (اسکن رله‌های گول) و فاز ۲ (مسک تاکتیکی TCP بر روی Anycast) همراه با تایم‌اوت ۲۸ ثانیه‌ای جهت کاوش مطمئن.
-                    </p>
-                    <div class="space-y-1.5 text-[11px] text-gray-400 font-mono bg-black/30 p-2.5 rounded-lg border border-white/5">
-                        <div class="flex justify-between"><span>پروتکل پایه:</span><span class="text-white">Gool + Masque</span></div>
-                        <div class="flex justify-between"><span>کاوشگر رله:</span><span class="text-theme font-bold">Ironclad Scanner</span></div>
-                        <div class="flex justify-between"><span>بازه کاوش:</span><span class="text-green-400">۲۸ ثانیه هوشمند</span></div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Interactive Ping Test Simulator -->
-            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
-                    <div>
-                        <h3 class="text-xl font-extrabold text-white">شبیه‌ساز زنده پایش پینگ Anycast سرورها</h3>
-                        <p class="text-gray-400 text-xs sm:text-sm mt-1">تست تاخیر رله‌های پاک و پایدار اروپا و خاورمیانه بر روی مسیرهای بهینه‌شده SinaVPN</p>
-                    </div>
-                    <button id="btn-run-ping-test" onclick="runPingSimulation()" class="btn-cyber-primary px-5 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2">
-                        <span id="ping-btn-icon">⚡</span>
-                        <span id="ping-btn-text">شروع سنجش پینگ زنده</span>
-                    </button>
-                </div>
-
-                <!-- Server Grid -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4" id="server-ping-grid">
-                    <!-- Cards will be populated by JS -->
-                </div>
-            </div>
-
-        </section>
-
-        <section id="simulator" class="max-w-7xl mx-auto px-4 sm:px-8 py-20 border-t border-white/5">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel text-xs text-theme border border-theme/30 font-semibold">
-                    <span>📱 تجربه تعاملی رابط کاربری</span>
-                </div>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                    شبیه‌ساز زنده محیط اپلیکیشن <span class="text-theme">SinaVPN</span>
-                </h2>
-                <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
-                    عملکرد دکمه مرکزی، موج‌های تشعشعی اتصال، نمودار زنده ترافیک و حالت جدید تماشای افقی (Landscape) را مستقیماً در مرورگر تجربه کنید.
-                </p>
-            </div>
-
-            <!-- Simulator Controls & Phone Container -->
-            <div class="flex flex-col items-center">
-                
-                <!-- View Mode Switcher: Portrait vs Landscape -->
-                <div class="flex items-center gap-3 p-1.5 rounded-2xl glass-panel border border-white/10 mb-8">
-                    <button id="sim-btn-portrait" onclick="setSimOrientation('portrait')" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-theme text-black transition-all">
-                        حالت عمودی (Portrait)
-                    </button>
-                    <button id="sim-btn-landscape" onclick="setSimOrientation('landscape')" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-300 hover:text-white transition-all">
-                        حالت افقی ویژه تماشا (Landscape)
-                    </button>
-                </div>
-
-                <!-- Phone Frame Mockup -->
-                <div id="phone-frame" class="relative transition-all duration-500 rounded-[48px] p-4 bg-gradient-to-b from-[#1e293b] to-[#0f172a] border-4 border-[#334155] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] w-[340px] h-[680px]">
-                    <!-- Outer camera notch / Dynamic Island -->
-                    <div id="phone-island" class="absolute top-6 left-1/2 -translate-x-1/2 w-28 h-5 bg-black rounded-full z-30 flex items-center justify-center">
-                        <div class="w-2.5 h-2.5 rounded-full bg-[#1e293b] mr-4"></div>
-                        <div class="w-2 h-2 rounded-full bg-[#0284c7]/40"></div>
-                    </div>
-
-                    <!-- Screen Content -->
-                    <div id="phone-screen" class="relative w-full h-full rounded-[38px] overflow-hidden bg-[#06090e] border border-white/10 flex flex-col justify-between p-5 text-white select-none">
+                <!-- Right Column: Windscribe-Style App Client Mockup -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="wind-app-mockup w-full max-w-sm p-6 sm:p-7 relative select-none">
                         
-                        <!-- Status Bar -->
-                        <div class="flex items-center justify-between text-[11px] text-gray-400 font-mono pt-1 px-2 z-20">
-                            <span>21:40</span>
+                        <!-- Client Header -->
+                        <div class="flex items-center justify-between pb-5 border-b border-white/10 mb-6">
+                            <div class="flex items-center gap-2.5">
+                                <img src="logo-transparent.png" alt="SinaVPN" class="w-7 h-7 object-contain">
+                                <span class="font-bold text-white text-sm">SinaVPN Client</span>
+                            </div>
                             <div class="flex items-center gap-2">
-                                <span>5G</span>
-                                <span>📶</span>
-                                <span>100% 🔋</span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#00F5A0] shadow-[0_0_8px_#00F5A0]"></span>
+                                <span class="text-[11px] font-mono text-[#00F5A0] font-bold">CONNECTED</span>
                             </div>
                         </div>
 
-                        <!-- App Header Inside Phone -->
-                        <div class="flex items-center justify-between mt-4 px-2 z-20">
-                            <div class="flex items-center gap-2">
-                                <div class="w-7 h-7 rounded-lg bg-theme/20 p-1 border border-theme/40">
-                                    <img src="logo-transparent.png" class="w-full h-full object-contain">
-                                </div>
-                                <span class="font-bold text-sm tracking-tight">SinaVPN</span>
-                            </div>
-                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-theme font-bold border border-theme/30">v3.6.3</span>
-                        </div>
-
-                        <!-- Central Connection Orb -->
-                        <div class="my-auto flex flex-col items-center justify-center relative py-6">
-                            
-                            <!-- Pulsing Halo Rings -->
-                            <div id="sim-halo" class="absolute w-44 h-44 rounded-full border border-theme/20 transition-all duration-700 opacity-20"></div>
-                            <div id="sim-halo-outer" class="absolute w-56 h-56 rounded-full border border-theme/10 transition-all duration-1000 opacity-10"></div>
-
-                            <!-- Interactive Orb Button -->
-                            <button id="sim-power-btn" onclick="toggleSimConnection()" class="relative z-10 w-36 h-36 rounded-full glass-panel border-2 border-white/20 flex flex-col items-center justify-center gap-2 shadow-2xl transition-all duration-500 hover:scale-105 active:scale-95 group cursor-pointer">
-                                <svg id="sim-power-icon" class="w-12 h-12 text-gray-400 transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        <!-- Connection Orb (Center Power Button) -->
+                        <div class="flex flex-col items-center justify-center my-6">
+                            <div class="power-orb w-28 h-28 rounded-full flex flex-col items-center justify-center cursor-pointer group mb-4">
+                                <svg class="w-12 h-12 text-[#00F5A0] drop-shadow-[0_0_12px_rgba(0,245,160,0.8)] transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
-                                <span id="sim-power-label" class="text-xs font-bold text-gray-300">لمس برای اتصال</span>
-                            </button>
+                            </div>
+                            <span class="text-xs font-bold text-gray-300">اتصال امن برقرار است</span>
+                            <span class="text-[11px] font-mono text-gray-400 mt-0.5">IP Masked • Tunnel Encrypted</span>
+                        </div>
 
-                            <!-- Connection Status Text -->
-                            <div class="mt-5 text-center">
-                                <div id="sim-status-badge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 text-[11px] font-semibold text-gray-400 border border-white/10">
-                                    <span id="sim-status-dot" class="w-2 h-2 rounded-full bg-gray-500"></span>
-                                    <span id="sim-status-text">قطع ارتباط</span>
+                        <!-- Server Location Card -->
+                        <div class="bg-white/5 border border-white/5 rounded-2xl p-4 mb-3.5 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">🇩🇪</span>
+                                <div class="text-right">
+                                    <span class="text-xs font-bold text-white block">فرانکفورت، آلمان</span>
+                                    <span class="text-[10px] text-gray-400 font-mono">Mozilla Fastly Edge Relay</span>
                                 </div>
                             </div>
+                            <span class="px-2.5 py-1 rounded-lg bg-[#00F5A0]/10 text-[#00F5A0] text-xs font-mono font-bold border border-[#00F5A0]/20">
+                                42 ms
+                            </span>
                         </div>
 
-                        <!-- Live Metrics Box inside Phone -->
-                        <div class="glass-panel p-3.5 rounded-2xl border border-white/10 space-y-2 mb-2">
-                            <div class="flex items-center justify-between text-xs">
-                                <span class="text-gray-400">پروتکل فعال:</span>
-                                <span id="sim-protocol-text" class="text-theme font-bold font-mono">MOZILLA FASTLY</span>
+                        <!-- Quota & Protocol Pill -->
+                        <div class="grid grid-cols-2 gap-2 text-center text-xs">
+                            <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                                <span class="text-[10px] text-gray-400 block mb-0.5">سهمیه موزیلا:</span>
+                                <span class="font-bold text-[#00F5A0] font-mono">۵۰ GB</span>
                             </div>
-                            <div class="flex items-center justify-between text-xs">
-                                <span class="text-gray-400">تاخیر Anycast:</span>
-                                <span id="sim-ping-text" class="text-white font-mono font-bold">-- ms</span>
+                            <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                                <span class="text-[10px] text-gray-400 block mb-0.5">پروتکل فعال:</span>
+                                <span class="font-bold text-white font-mono">DoH / MASQUE</span>
                             </div>
-                            <div class="flex items-center justify-between text-xs">
-                                <span class="text-gray-400">ترافیک دانلینک:</span>
-                                <span id="sim-speed-text" class="text-theme font-mono font-bold">۰.۰ KB/s</span>
-                            </div>
-                        </div>
-
-                        <!-- Navigation Bar Inside Phone -->
-                        <div class="flex items-center justify-around py-1 text-gray-500 text-xs border-t border-white/5">
-                            <span class="text-theme font-bold">اتصال</span>
-                            <span>سرورها</span>
-                            <span>تنظیمات</span>
                         </div>
 
                     </div>
                 </div>
 
-                <!-- Guidance Note -->
-                <p class="text-xs text-gray-500 mt-4 text-center">
-                    دکمه مرکزی شبیه‌ساز را لمس کنید تا فرآیند اتصال و پالس نئونی شبیه‌سازی شود.
-                </p>
             </div>
         </section>
 
-        <section id="themes" class="max-w-7xl mx-auto px-4 sm:px-8 py-20 border-t border-white/5">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel text-xs text-theme border border-theme/30 font-semibold">
-                    <span>🎨 شخصی‌سازی زنده</span>
-                </div>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                    ۱۵ پوسته رنگی اصیل و <span class="text-theme">پویای SinaVPN</span>
-                </h2>
-                <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
-                    روی هر تم کلیک کنید تا نورپردازی سه‌بعدی نشان، اجزای وب‌سایت و شبیه‌ساز اپلیکیشن به‌صورت آنی به رنگ انتخابی تغییر کند.
+        <!-- ========================================== -->
+        <!-- 3. Windscribe Value Pillars (Features)     -->
+        <!-- ========================================== -->
+        <section id="features" class="max-w-7xl mx-auto px-4 sm:px-8 py-20 border-t border-white/5">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs font-bold text-[#00F5A0] uppercase tracking-wider">سپر محافظ دیجیتال شما</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">فراتر از یک فیلترشکن معمولی</h2>
+                <p class="text-sm sm:text-base text-gray-400 mt-3 leading-relaxed">
+                    SinaVPN با ترکیب تکنولوژی‌های نوین تونل‌زنی، تجربه وب‌گردی آزاد و پایدار را برای کاربران در دشوارترین شرایط شبکه فراهم می‌آورد.
                 </p>
             </div>
 
-            <!-- Theme Buttons Grid -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5" id="themes-grid">
-                <!-- Will be dynamically populated by JS with 15 themes -->
-            </div>
-        </section>
-
-        <section id="download" class="max-w-7xl mx-auto px-4 sm:px-8 py-20 border-t border-white/5">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel text-xs text-theme border border-theme/30 font-semibold">
-                    <span>🚀 دریافت نسخه نهایی</span>
-                </div>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                    مرکز دانلود رسمی <span class="text-theme">SinaVPN v3.6.3</span>
-                </h2>
-                <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
-                    بسته نصبی فراگیر یونیورسال (Universal APK) با تضمین عملکرد پایدار بر روی تمامی پردازنده‌ها و نسخه‌های اندروید.
-                </p>
-            </div>
-
-            <!-- Single Universal Download Showcase Box -->
-            <div class="max-w-4xl mx-auto glass-panel p-8 sm:p-12 rounded-3xl border-2 border-theme/30 shadow-[0_0_50px_rgba(var(--theme-primary-rgb),0.15)] relative overflow-hidden">
-                <!-- Background ambient glow -->
-                <div class="absolute -right-20 -top-20 w-80 h-80 bg-theme/10 rounded-full blur-3xl pointer-events-none"></div>
-
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                    
-                    <!-- Left Column: Info & Action Buttons (Right in RTL) -->
-                    <div class="md:col-span-8 space-y-6">
-                        
-                        <!-- Release Pill -->
-                        <div class="flex items-center gap-3">
-                            <span class="px-3.5 py-1 rounded-full bg-theme/20 text-theme font-extrabold text-xs border border-theme/40">نسخه نهایی v3.6.3</span>
-                            <span class="text-xs text-gray-400 font-mono">تاریخ انتشار: پاییز ۲۰۲۶</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Pillar 1 -->
+                <div class="wind-card rounded-3xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-[#00F5A0]/10 flex items-center justify-center text-[#00F5A0] mb-5 border border-[#00F5A0]/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                         </div>
+                        <h3 class="text-lg font-extrabold text-white mb-2">حریم خصوصی واقعی</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                            هیچ لاگی از فعالیت‌ها یا وب‌سایت‌های بازدیدشده ذخیره نمی‌شود. احراز هویت با لایسنس رمزنگاری آفلاین در حافظه گوشی شما انجام می‌گیرد.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 text-[11px] text-[#00F5A0] font-mono">
+                        #NoLogsPolicy
+                    </div>
+                </div>
 
+                <!-- Pillar 2 -->
+                <div class="wind-card rounded-3xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-5 border border-blue-500/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-white mb-2">رله ۵۰ گیگابایت موزیلا</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                            دسترسی مستقیم و ماهانه به ۵۰ گیگابایت ترافیک فوق‌سریع بر بستر لبه‌های ابری Fastly FPN با پل اختصاصی Netty برای یوتیوب و اینستاگرام.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 text-[11px] text-blue-400 font-mono">
+                        #MozillaCloudRelay
+                    </div>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="wind-card rounded-3xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-400 mb-5 border border-purple-500/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-white mb-2">ضد فیلترینگ چندلایه</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                            مجهز به پروتکل‌های فرار از بازرسی عمیق بسته‌ها (DPI) شامل Tactical MASQUE، WireGuard، و Shadowsocks WoW با سوییچ تطبیقی خودکار.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 text-[11px] text-purple-400 font-mono">
+                        #CensorshipResistant
+                    </div>
+                </div>
+
+                <!-- Pillar 4 -->
+                <div class="wind-card rounded-3xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-5 border border-amber-500/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-white mb-2">سبک و بدون تبلیغات</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                            هیچ ویدیوی تبلیغاتی یا تبلیغ پاپ‌آپ شما را آزار نمی‌دهد. طراحی تمیز، سبک و مصرف حداقل باتری روی تمامی گوشی‌های اندروید.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 text-[11px] text-amber-400 font-mono">
+                        #ZeroBloatware
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 4. Play Protect Installation Help Guide   -->
+        <!-- ========================================== -->
+        <section id="install-guide" class="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-white/5">
+            <div class="wind-card rounded-3xl p-8 sm:p-10">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
+                    <div>
+                        <span class="text-xs font-bold text-[#00F5A0] uppercase tracking-wider">راهنمای بدون دردسر</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">حل اخطار Google Play Protect هنگام نصب</h3>
+                    </div>
+                    <span class="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-gray-300">
+                        سریع و ۲ مرحله‌ای
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-sm text-gray-300">
+                    <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/5 flex gap-4 items-start">
+                        <div class="w-8 h-8 rounded-full bg-[#00F5A0]/20 text-[#00F5A0] font-black flex items-center justify-center shrink-0">۱</div>
                         <div>
-                            <h3 class="text-2xl sm:text-3xl font-black text-white">بسته نصبی فراگیر (Universal APK)</h3>
-                            <p class="text-gray-300 text-sm mt-2 leading-relaxed">
-                                شامل پکیج کامل باینری‌های استتار شبکه برای تمامی معماری‌ها: <code>arm64-v8a</code>, <code>armeabi-v7a</code>, <code>x86</code>, <code>x86_64</code> بدون نیاز به انتخاب جداگانه.
-                            </p>
+                            <span class="font-bold text-white block mb-1">کلیک روی «جزئیات بیشتر» (More details)</span>
+                            <span class="text-xs text-gray-400 leading-relaxed">
+                                گوگل پلی به دلیل اینکه فایل خارج از استور دانلود شده اخطار احتیاطی می‌دهد. در کادر بازشده روی گزینه <strong class="text-white">More details</strong> یا «جزئیات بیشتر» بزنید.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/5 flex gap-4 items-start">
+                        <div class="w-8 h-8 rounded-full bg-[#00F5A0]/20 text-[#00F5A0] font-black flex items-center justify-center shrink-0">۲</div>
+                        <div>
+                            <span class="font-bold text-white block mb-1">انتخاب «نصب در هر حال» (Install anyway)</span>
+                            <span class="text-xs text-gray-400 leading-relaxed">
+                                روی دکمه <strong class="text-[#00F5A0]">Install anyway</strong> کلیک کنید تا اپلیکیشن بلافاصله نصب و آماده اتصال شود.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 5. Download Center (Universal v3.6.3)      -->
+        <!-- ========================================== -->
+        <section id="download" class="max-w-5xl mx-auto px-4 sm:px-8 py-20 border-t border-white/5">
+            <div class="wind-card rounded-3xl p-8 sm:p-12 relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                    
+                    <!-- Download Details -->
+                    <div class="lg:col-span-2 space-y-6 text-right">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full wind-pill text-xs font-bold">
+                            <span>پکیج رسمی یونیورسال ۳.۶.۳</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">مرکز دریافت مستقیم اپلیکیشن</h2>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            این بسته جامع شامل کتابخانه‌های بهینه‌سازی‌شده برای تمامی پردازنده‌های ۶۴ بیتی و ۳۲ بیتی بوده و روی ۱۰۰٪ دستگاه‌های اندرویدی (اندروید ۶ تا ۱۵) کار می‌کند.
+                        </p>
+
+                        <!-- Specifications -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-xs text-gray-300">
+                            <div class="p-3.5 rounded-xl bg-white/5 border border-white/5">
+                                <span class="text-gray-400 block mb-0.5">نام فایل:</span>
+                                <span class="font-mono font-semibold text-white truncate block">SinaVPN-v3.6.3-Universal.apk</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-white/5 border border-white/5">
+                                <span class="text-gray-400 block mb-0.5">حجم فایل:</span>
+                                <span class="font-mono font-semibold text-white">68.8 MB</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-white/5 border border-white/5 col-span-2 sm:col-span-1">
+                                <span class="text-gray-400 block mb-0.5">نسخه اندروید:</span>
+                                <span class="font-semibold text-white">Android 6.0+</span>
+                            </div>
                         </div>
 
-                        <!-- Technical Specs Matrix -->
-                        <div class="grid grid-cols-3 gap-3 text-center py-2">
-                            <div class="p-2.5 rounded-xl bg-white/5 border border-white/5">
-                                <span class="text-[11px] text-gray-400 block">حجم فایل</span>
-                                <span class="text-sm font-bold text-white font-mono">68.8 MB</span>
-                            </div>
-                            <div class="p-2.5 rounded-xl bg-white/5 border border-white/5">
-                                <span class="text-[11px] text-gray-400 block">حداقل اندروید</span>
-                                <span class="text-sm font-bold text-theme font-mono">Android 8.0+</span>
-                            </div>
-                            <div class="p-2.5 rounded-xl bg-white/5 border border-white/5">
-                                <span class="text-[11px] text-gray-400 block">وضعیت تست</span>
-                                <span class="text-sm font-bold text-green-400">تایید شده ۱۰۰٪</span>
-                            </div>
-                        </div>
-
-                        <!-- Main Download Buttons -->
-                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
-                            <!-- Direct Download -->
-                            <a href="https://github.com/sinamp00/sina/releases/download/v3.6.3/SinaVPN-v3.6.3-Universal.apk" download class="btn-cyber-primary px-6 py-4 rounded-xl text-center text-sm font-extrabold flex items-center justify-center gap-2.5 shadow-lg">
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-4">
+                            <a href="https://github.com/sinamp00/sina/releases/download/v3.6.3/SinaVPN-v3.6.3-Universal.apk" download class="btn-wind-primary px-7 py-4 rounded-xl text-center text-sm font-bold flex items-center justify-center gap-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                                <span>دانلود مستقیم فایل (سرور داخلی)</span>
+                                <span>دانلود مستقیم فایل (سرور ابری)</span>
                             </a>
-                            <!-- GitHub Mirror -->
-                            <a href="https://github.com/sinamp00/sina/releases/download/v3.6.3/SinaVPN-v3.6.3-Universal.apk" target="_blank" rel="noopener noreferrer" class="glass-panel hover:border-theme/60 text-white px-5 py-4 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2">
-                                <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
-                                <span>لینک کمکی گیت‌هاب</span>
-                            </a>
-                        </div>
 
-                        <!-- SHA-256 Hash Box -->
-                        <div class="bg-black/40 p-3.5 rounded-xl border border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
-                            <div class="flex items-center gap-2 overflow-hidden">
-                                <span class="text-gray-400 whitespace-nowrap">کد اصالت SHA-256:</span>
-                                <code id="download-hash-val" class="font-mono text-gray-300 truncate max-w-[240px] sm:max-w-[320px]">aa397bc6f5fb071cf730c16513dcff168c0df298c7538eaf4a77a9c4a22676e0</code>
-                            </div>
-                            <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
-                                <button onclick="copyHash()" class="text-theme hover:underline font-bold px-2 py-1 rounded bg-white/5">کپی کد هش</button>
-                                <button onclick="copyDirectLink()" class="text-gray-300 hover:text-white px-2 py-1 rounded bg-white/5">کپی لینک مستقیم</button>
-                            </div>
+                            <button id="btn-copy-hash" class="btn-wind-secondary px-5 py-4 rounded-xl text-xs font-mono font-semibold flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                <span id="hash-text">کپی چک‌سام SHA-256</span>
+                            </button>
                         </div>
-
                     </div>
 
-                    <!-- Right Column: QR Code Display -->
-                    <div class="md:col-span-4 flex flex-col items-center justify-center p-6 rounded-2xl bg-black/40 border border-white/10 text-center">
-                        <div id="download-qr-box" class="p-3 bg-white rounded-xl shadow-lg mb-3">
-                            <!-- Inlined QR Code will render here -->
-                        </div>
-                        <span class="text-xs font-bold text-white">اسکن با دوربین گوشی</span>
-                        <span class="text-[11px] text-gray-400 mt-0.5">دانلود بی‌درنگ روی موبایل</span>
+                    <!-- QR Code Widget -->
+                    <div class="flex flex-col items-center justify-center p-6 rounded-2xl bg-black/40 border border-white/5 text-center">
+                        <div class="bg-white p-3 rounded-xl shadow-lg mb-3" id="qrcode-container"></div>
+                        <span class="text-xs text-gray-400 font-medium">اسکن با دوربین جهت دانلود روی گوشی</span>
                     </div>
 
                 </div>
             </div>
         </section>
 
-        <section id="security" class="max-w-7xl mx-auto px-4 sm:px-8 py-20 border-t border-white/5">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel text-xs text-theme border border-theme/30 font-semibold">
-                    <span>🛡️ امنیت در سطح هسته</span>
-                </div>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                    معماری استتار پیشرفته و <span class="text-theme">حفظ حریم خصوصی</span>
-                </h2>
-                <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
-                    در SinaVPN، امنیت یک ادعا نیست بلکه یک اصل ریاضی و مهندسی است که در تک‌تک لایه‌های سیستم پیاده‌سازی شده است.
-                </p>
-            </div>
+    </main>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 space-y-3">
-                    <h4 class="font-bold text-white text-base">طراحی بدون ثبت داده (Zero-Log)</h4>
-                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                        هیچ‌گونه سابقه‌ای از ترافیک عبوری، مقاصد اینترنتی، اطلاعات سخت‌افزاری یا هویت کاربران ذخیره نمی‌شود و تمامی اطلاعات پس از بسته شدن سوکت معدوم می‌گردد.
-                    </p>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 space-y-3">
-                    <h4 class="font-bold text-white text-base">فرگمنت پکت‌های هدر (DPI Evasion)</h4>
-                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                        تقسیم هدرهای حساس به بسته‌های بسیار ریز ۱۶ تا ۳۲ بایتی با تاخیر مصنوعی ۳ تا ۸ میلی‌ثانیه جهت ناتوان‌سازی سامانه‌های شناسایی الگوهای ترافیکی.
-                    </p>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 space-y-3">
-                    <h4 class="font-bold text-white text-base">لایسنسینگ آفلاین ECDSA</h4>
-                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                        اعتبارسنجی کدهای فعال‌سازی بدون نیاز به اتصال به سرور مرکزی با استفاده از امضای دیجیتال NIST P-256 و کلیدهای حفاظت‌شده در سخت‌افزار دستگاه.
-                    </p>
-                </div>
+    <!-- ========================================== -->
+    <!-- 6. Windscribe Minimalist Clean Footer      -->
+    <!-- ========================================== -->
+    <footer class="border-t border-white/5 py-12 px-4 sm:px-8 text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5">
+            <div class="flex items-center gap-3">
+                <img src="logo-transparent.png" alt="SinaVPN" class="w-7 h-7 object-contain opacity-70">
+                <span>© ۲۰۲۶ SinaVPN. تمامی حقوق برای آزادی دسترسی به اینترنت محفوظ است.</span>
             </div>
-        </section>
-
-        <footer class="border-t border-white/10 bg-[#040609] py-12 px-4 sm:px-8 text-center text-xs text-gray-500">
-            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg bg-theme/20 p-1 border border-theme/40">
-                        <img src="logo-transparent.png" class="w-full h-full object-contain">
-                    </div>
-                    <span class="text-white font-extrabold text-sm">SinaVPN Ecosystem</span>
-                    <span class="text-gray-400 font-mono">v3.6.3 Universal</span>
-                </div>
-                <div>
-                    سامانه نسل نوین استتار شبکه و ارتباط پایدار • تمامی حقوق محفوظ است
-                </div>
-                <div class="flex items-center gap-4 text-gray-400">
-                    <a href="https://github.com/sinamp00/sina" target="_blank" class="hover:text-theme transition-colors">مخزن گیت‌هاب</a>
-                    <span>•</span>
-                    <a href="version.json" target="_blank" class="hover:text-theme transition-colors">اطلاعات نسخه (JSON)</a>
-                    <span>•</span>
-                    <a href="#hero" class="hover:text-theme transition-colors">بازگشت به بالا ↑</a>
-                </div>
-            </div>
-        </footer>
-
-        <!-- QR Code Modal -->
-        <div id="qr-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-            <div class="glass-panel p-8 rounded-3xl border border-theme/40 max-w-sm w-full text-center relative shadow-2xl">
-                <button onclick="closeQrModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white text-lg">✕</button>
-                <h4 class="text-lg font-bold text-white mb-2">اسکن برای دانلود مستقیم</h4>
-                <p class="text-xs text-gray-400 mb-6">با دوربین گوشی این کد را اسکن کنید تا فایل ۶۸.۸ مگابایتی فورا دریافت شود.</p>
-                <div id="modal-qr-box" class="p-4 bg-white rounded-2xl inline-block shadow-lg mb-4"></div>
-                <div class="text-[11px] font-mono text-gray-400">SinaVPN-v3.6.3-Universal.apk</div>
+            <div class="flex items-center gap-6 font-medium">
+                <a href="https://t.me/sinavpn_channel" target="_blank" rel="noopener noreferrer" class="hover:text-gray-300 transition-colors">کانال تلگرام</a>
+                <a href="https://github.com/sinamp00/sina" target="_blank" rel="noopener noreferrer" class="hover:text-gray-300 transition-colors">مخزن گیت‌هاب</a>
+                <a href="https://github.com/sinamp00/sina/releases/tag/v3.6.3" target="_blank" rel="noopener noreferrer" class="hover:text-gray-300 transition-colors">یادداشت نسخه ۳.۶.۳</a>
+                <a href="version.json" target="_blank" class="hover:text-gray-300 transition-colors font-mono">version.json</a>
             </div>
         </div>
+    </footer>
 
-        <script>
-        // ==========================================
-        // 1. Audio Engine (Web Audio API Synthesizer)
-        // ==========================================
-        let audioCtx = null;
-        let isAudioMuted = true; // default soft/muted
-
-        function initAudio() {
-            if (!audioCtx) {
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                if (AudioContext) audioCtx = new AudioContext();
-            }
-        }
-
-        function playSound(type) {
-            if (isAudioMuted || !audioCtx) return;
-            try {
-                if (audioCtx.state === 'suspended') audioCtx.resume();
-                const now = audioCtx.currentTime;
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                if (type === 'click') {
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(800, now);
-                    osc.frequency.exponentialRampToValueAtTime(400, now + 0.06);
-                    gain.gain.setValueAtTime(0.12, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
-                    osc.start(now);
-                    osc.stop(now + 0.06);
-                } else if (type === 'connect') {
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(300, now);
-                    osc.frequency.exponentialRampToValueAtTime(950, now + 0.25);
-                    gain.gain.setValueAtTime(0.15, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
-                    osc.start(now);
-                    osc.stop(now + 0.25);
-                } else if (type === 'theme') {
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(520, now);
-                    osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
-                    gain.gain.setValueAtTime(0.1, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
-                    osc.start(now);
-                    osc.stop(now + 0.12);
-                } else if (type === 'burst') {
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(220, now);
-                    osc.frequency.exponentialRampToValueAtTime(60, now + 0.4);
-                    gain.gain.setValueAtTime(0.18, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-                    osc.start(now);
-                    osc.stop(now + 0.4);
-                }
-            } catch (e) {
-                console.warn('Audio error:', e);
-            }
-        }
-
-        const soundToggleBtn = document.getElementById('sound-toggle-btn');
-        if (soundToggleBtn) {
-            soundToggleBtn.addEventListener('click', () => {
-                initAudio();
-                isAudioMuted = !isAudioMuted;
-                document.getElementById('sound-icon').textContent = isAudioMuted ? '🔇' : '🔊';
-                showToast(isAudioMuted ? 'جلوه‌های صوتی خاموش شد' : 'جلوه‌های صوتی فعال شد');
-                if (!isAudioMuted) playSound('click');
-            });
-        }
-
-        // ==========================================
-        // 2. Interactive 15 Themes Definition & System
-        // ==========================================
-        const THEMES = [
-            { id: 'emerald', name: 'سبز زمردی', primary: '#00F5A0', secondary: '#00F0FF', hexInt: 0x00F5A0 },
-            { id: 'cyan', name: 'فیروزه‌ای نئونی', primary: '#00F0FF', secondary: '#38BDF8', hexInt: 0x00F0FF },
-            { id: 'sapphire', name: 'یاقوت کبود', primary: '#3B82F6', secondary: '#60A5FA', hexInt: 0x3B82F6 },
-            { id: 'amethyst', name: 'یاقوت بنفش', primary: '#A855F7', secondary: '#C084FC', hexInt: 0xA855F7 },
-            { id: 'amber', name: 'کهربایی خورشیدی', primary: '#F59E0B', secondary: '#FBBF24', hexInt: 0xF59E0B },
-            { id: 'crimson', name: 'زرشکی پنهان‌کار', primary: '#EF4444', secondary: '#F87171', hexInt: 0xEF4444 },
-            { id: 'rose', name: 'رز سایبر', primary: '#F43F5E', secondary: '#FB7185', hexInt: 0xF43F5E },
-            { id: 'gold', name: 'طلای فاخر', primary: '#EAB308', secondary: '#FDE047', hexInt: 0xEAB308 },
-            { id: 'ocean', name: 'لاجوردی اقیانوسی', primary: '#0284C7', secondary: '#38BDF8', hexInt: 0x0284C7 },
-            { id: 'tactical', name: 'سبز فسفری تاکتیکال', primary: '#84CC16', secondary: '#A3E635', hexInt: 0x84CC16 },
-            { id: 'sunset', name: 'عقیق پرتقالی', primary: '#F97316', secondary: '#FB923C', hexInt: 0xF97316 },
-            { id: 'magenta', name: 'بنفش نئونی', primary: '#D946EF', secondary: '#E879F9', hexInt: 0xD946EF },
-            { id: 'titanium', name: 'نقره‌ای تیتانیوم', primary: '#94A3B8', secondary: '#CBD5E1', hexInt: 0x94A3B8 },
-            { id: 'ice', name: 'آبی متالیک یخ‌زده', primary: '#38BDF8', secondary: '#7DD3FC', hexInt: 0x38BDF8 },
-            { id: 'quantum', name: 'کوانتوم وایت', primary: '#F8FAFC', secondary: '#E2E8F0', hexInt: 0xF8FAFC },
-        ];
-
-        let currentTheme = THEMES[0];
-
-        function hexToRgb(hex) {
-            const clean = hex.replace('#', '');
-            const bigint = parseInt(clean, 16);
-            const r = (bigint >> 16) & 255;
-            const g = (bigint >> 8) & 255;
-            const b = bigint & 255;
-            return `${r}, ${g}, ${b}`;
-        }
-
-        function applyTheme(theme) {
-            currentTheme = theme;
-            const root = document.documentElement;
-            const rgbPrimary = hexToRgb(theme.primary);
-            const rgbSecondary = hexToRgb(theme.secondary);
-
-            root.style.setProperty('--theme-primary', theme.primary);
-            root.style.setProperty('--theme-primary-rgb', rgbPrimary);
-            root.style.setProperty('--theme-secondary', theme.secondary);
-            root.style.setProperty('--theme-secondary-rgb', rgbSecondary);
-            root.style.setProperty('--theme-glow', `rgba(${rgbPrimary}, 0.35)`);
-            root.style.setProperty('--theme-bg-glow', `rgba(${rgbPrimary}, 0.05)`);
-            root.style.setProperty('--theme-border', `rgba(${rgbPrimary}, 0.3)`);
-
-            // Sync 3D Scene
-            if (window.syncThreeColors) {
-                window.syncThreeColors(theme.hexInt);
-            }
-
-            // Sync Phone simulator orb
-            const simPowerIcon = document.getElementById('sim-power-icon');
-            if (simConnected && simPowerIcon) {
-                simPowerIcon.style.color = theme.primary;
-            }
-
-            playSound('theme');
-            renderThemeButtons();
-            showToast(`پوسته «${theme.name}» با موفقیت فعال شد`);
-        }
-
-        function renderThemeButtons() {
-            const container = document.getElementById('themes-grid');
-            if (!container) return;
-            container.innerHTML = '';
-            THEMES.forEach(t => {
-                const isSelected = t.id === currentTheme.id;
-                const btn = document.createElement('button');
-                btn.className = `p-3 rounded-2xl glass-panel text-right flex items-center justify-between transition-all duration-300 border ${isSelected ? 'border-theme ring-2 ring-theme shadow-lg scale-[1.02]' : 'border-white/10 hover:border-white/30 hover:scale-[1.01]'}`;
-                btn.onclick = () => applyTheme(t);
-                btn.innerHTML = `
-                    <div class="flex items-center gap-2.5">
-                        <span class="w-4 h-4 rounded-full shadow" style="background: ${t.primary}; box-shadow: 0 0 10px ${t.primary};"></span>
-                        <span class="text-xs font-bold ${isSelected ? 'text-theme' : 'text-gray-200'}">${t.name}</span>
-                    </div>
-                    ${isSelected ? '<span class="text-theme text-xs font-bold">✓</span>' : ''}
-                `;
-                container.appendChild(btn);
-            });
-        }
-
-        // ==========================================
-        // 3. Three.js Interactive 3D WebGL Shield
-        // ==========================================
-        (function initThreeShield() {
-            const canvas = document.getElementById('shield-canvas');
-            const wrapper = document.getElementById('shield-3d-wrapper');
-            if (!canvas || !wrapper || typeof THREE === 'undefined') return;
-
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(45, wrapper.clientWidth / wrapper.clientHeight, 0.1, 100);
-            camera.position.set(0, 0, 7.8);
-
-            const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
-            renderer.setSize(wrapper.clientWidth, wrapper.clientHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
-            scene.add(ambientLight);
-
-            const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
-            keyLight.position.set(4, 5, 6);
-            scene.add(keyLight);
-
-            const pointLight = new THREE.PointLight(currentTheme.hexInt, 3.5, 15);
-            pointLight.position.set(0, 0, 3.5);
-            scene.add(pointLight);
-
-            const backLight = new THREE.PointLight(currentTheme.hexInt, 2.0, 12);
-            backLight.position.set(0, 0, -3);
-            scene.add(backLight);
-
-            // Shield Root Group
-            const shieldGroup = new THREE.Group();
-            scene.add(shieldGroup);
-
-            // Procedural Shield Geometry
-            const shape = new THREE.Shape();
-            shape.moveTo(0, 2.2);
-            shape.quadraticCurveTo(1.6, 2.0, 1.8, 0.4);
-            shape.quadraticCurveTo(1.7, -1.0, 0, -2.4);
-            shape.quadraticCurveTo(-1.7, -1.0, -1.8, 0.4);
-            shape.quadraticCurveTo(-1.6, 2.0, 0, 2.2);
-
-            const extrudeSettings = {
-                depth: 0.35,
-                bevelEnabled: true,
-                bevelSegments: 5,
-                steps: 2,
-                bevelSize: 0.12,
-                bevelThickness: 0.12
-            };
-            const shieldGeo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-            shieldGeo.center();
-
-            const shieldMat = new THREE.MeshStandardMaterial({
-                color: 0x0c1119,
-                metalness: 0.85,
-                roughness: 0.25,
-                emissive: currentTheme.hexInt,
-                emissiveIntensity: 0.18
-            });
-            const shieldMesh = new THREE.Mesh(shieldGeo, shieldMat);
-            shieldGroup.add(shieldMesh);
-
-            // Texture Plate Overlay (transparent logo)
-            const texLoader = new THREE.TextureLoader();
-            texLoader.load('logo-transparent.png', function(tex) {
-                tex.generateMipmaps = true;
-                const plateGeo = new THREE.PlaneGeometry(3.5, 3.5);
-                const plateMat = new THREE.MeshBasicMaterial({
-                    map: tex,
-                    transparent: true,
-                    opacity: 0.98,
-                    depthWrite: false
-                });
-                const logoPlate = new THREE.Mesh(plateGeo, plateMat);
-                logoPlate.position.z = 0.31;
-                shieldGroup.add(logoPlate);
-            });
-
-            // Holographic Cyber Rings
-            const ringGeo1 = new THREE.TorusGeometry(3.1, 0.02, 16, 90);
-            const ringMat1 = new THREE.MeshBasicMaterial({ color: currentTheme.hexInt, transparent: true, opacity: 0.45, wireframe: true });
-            const ring1 = new THREE.Mesh(ringGeo1, ringMat1);
-            ring1.rotation.x = Math.PI / 3;
-            shieldGroup.add(ring1);
-
-            const ringGeo2 = new THREE.TorusGeometry(3.35, 0.015, 16, 90);
-            const ringMat2 = new THREE.MeshBasicMaterial({ color: 0x00F0FF, transparent: true, opacity: 0.35, wireframe: true });
-            const ring2 = new THREE.Mesh(ringGeo2, ringMat2);
-            ring2.rotation.y = Math.PI / 4;
-            shieldGroup.add(ring2);
-
-            // Floating Cyber Data Particles
-            const partCount = 750;
-            const partGeo = new THREE.BufferGeometry();
-            const partPos = new Float32Array(partCount * 3);
-            for (let i = 0; i < partCount * 3; i += 3) {
-                partPos[i] = (Math.random() - 0.5) * 16;
-                partPos[i + 1] = (Math.random() - 0.5) * 16;
-                partPos[i + 2] = (Math.random() - 0.5) * 12;
-            }
-            partGeo.setAttribute('position', new THREE.BufferAttribute(partPos, 3));
-            const partMat = new THREE.PointsMaterial({
-                size: 0.05,
-                color: currentTheme.hexInt,
-                transparent: true,
-                opacity: 0.65
-            });
-            const particles = new THREE.Points(partGeo, partMat);
-            scene.add(particles);
-
-            // Color Sync function
-            window.syncThreeColors = function(colorHex) {
-                pointLight.color.setHex(colorHex);
-                backLight.color.setHex(colorHex);
-                shieldMat.emissive.setHex(colorHex);
-                ringMat1.color.setHex(colorHex);
-                partMat.color.setHex(colorHex);
-            };
-
-            // Interactive Controls State
-            let isAutoRotate = true;
-            let isDragging = false;
-            let prevMouseX = 0;
-            let prevMouseY = 0;
-            let targetRotationX = 0;
-            let targetRotationY = 0;
-            let burstScale = 1;
-
-            // Mouse / Touch Dragging
-            canvas.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                prevMouseX = e.clientX;
-                prevMouseY = e.clientY;
-            });
-            window.addEventListener('mouseup', () => { isDragging = false; });
-            window.addEventListener('mousemove', (e) => {
-                if (isDragging) {
-                    const deltaX = e.clientX - prevMouseX;
-                    const deltaY = e.clientY - prevMouseY;
-                    targetRotationY += deltaX * 0.007;
-                    targetRotationX += deltaY * 0.007;
-                    prevMouseX = e.clientX;
-                    prevMouseY = e.clientY;
-                } else {
-                    const rect = canvas.getBoundingClientRect();
-                    const x = (e.clientX - rect.left) / rect.width - 0.5;
-                    const y = (e.clientY - rect.top) / rect.height - 0.5;
-                    pointLight.position.x = x * 4;
-                    pointLight.position.y = -y * 4;
-                }
-            });
-
-            // Touch support for mobile
-            canvas.addEventListener('touchstart', (e) => {
-                if (e.touches.length === 1) {
-                    isDragging = true;
-                    prevMouseX = e.touches[0].clientX;
-                    prevMouseY = e.touches[0].clientY;
-                }
-            }, { passive: true });
-            window.addEventListener('touchend', () => { isDragging = false; });
-            window.addEventListener('touchmove', (e) => {
-                if (isDragging && e.touches.length === 1) {
-                    const deltaX = e.touches[0].clientX - prevMouseX;
-                    const deltaY = e.touches[0].clientY - prevMouseY;
-                    targetRotationY += deltaX * 0.009;
-                    targetRotationX += deltaY * 0.009;
-                    prevMouseX = e.touches[0].clientX;
-                    prevMouseY = e.touches[0].clientY;
-                }
-            }, { passive: true });
-
-            // Button controls
-            const btnRotate = document.getElementById('btn-3d-rotate');
-            const rotateStatus = document.getElementById('rotate-status');
-            if (btnRotate) {
-                btnRotate.addEventListener('click', () => {
-                    isAutoRotate = !isAutoRotate;
-                    rotateStatus.textContent = isAutoRotate ? 'روشن' : 'خاموش';
-                    playSound('click');
-                });
-            }
-
-            const btnBurst = document.getElementById('btn-3d-burst');
-            function triggerBurst() {
-                burstScale = 1.35;
-                ringMat1.opacity = 0.95;
-                ringMat2.opacity = 0.85;
-                pointLight.intensity = 7;
-                playSound('burst');
-            }
-            if (btnBurst) {
-                btnBurst.addEventListener('click', triggerBurst);
-            }
-            canvas.addEventListener('click', () => {
-                triggerBurst();
-            });
-
-            // Render Animation Loop
-            let clock = new THREE.Clock();
-            function animate() {
-                requestAnimationFrame(animate);
-                const delta = clock.getDelta();
-                const time = clock.getElapsedTime();
-
-                // Auto rotate or manual damping
-                if (isAutoRotate && !isDragging) {
-                    targetRotationY += 0.008;
-                }
-                shieldGroup.rotation.y += (targetRotationY - shieldGroup.rotation.y) * 0.08;
-                shieldGroup.rotation.x += (targetRotationX - shieldGroup.rotation.x) * 0.08;
-
-                // Subtle floating motion
-                shieldGroup.position.y = Math.sin(time * 1.8) * 0.12;
-
-                // Orbiting rings
-                ring1.rotation.z += 0.015;
-                ring2.rotation.z -= 0.012;
-
-                // Particle floating
-                particles.rotation.y = time * 0.02;
-
-                // Burst recovery
-                if (burstScale > 1.0) {
-                    burstScale += (1.0 - burstScale) * 0.08;
-                    shieldGroup.scale.set(burstScale, burstScale, burstScale);
-                    ringMat1.opacity += (0.45 - ringMat1.opacity) * 0.05;
-                    ringMat2.opacity += (0.35 - ringMat2.opacity) * 0.05;
-                    pointLight.intensity += (3.5 - pointLight.intensity) * 0.05;
-                }
-
-                renderer.render(scene, camera);
-            }
-            animate();
-
-            // Responsive Camera Framing & Resize Observer
-            function updateCameraFraming() {
-                if (!wrapper) return;
-                const width = wrapper.clientWidth;
-                const height = wrapper.clientHeight;
-                const aspect = width / height;
-                camera.aspect = aspect;
-                if (aspect < 1.0) {
-                    camera.position.z = 7.8 + (1.0 - aspect) * 3.8;
-                } else {
-                    camera.position.z = 7.8;
-                }
-                camera.updateProjectionMatrix();
-                renderer.setSize(width, height);
-            }
-            updateCameraFraming();
-            window.addEventListener('resize', updateCameraFraming);
-        })();
-
-        // ==========================================
-        
-        // ==========================================
-        // 3D Card Tilt & Specular Physics
-        // ==========================================
-        (function initCardTilt() {
-            const cards = document.querySelectorAll('.tilt-card');
-            cards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = ((y - centerY) / centerY) * -7;
-                    const rotateY = ((x - centerX) / centerX) * 7;
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-                    card.style.setProperty('--mouse-x', `${x}px`);
-                    card.style.setProperty('--mouse-y', `${y}px`);
-                });
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-                });
-            });
-        })();
-
-        // 4. Live Ping Test Simulation
-        // ==========================================
-        const SERVERS = [
-            { id: 'fra', name: 'فرانکفورت، آلمان', flag: '🇩🇪', basePing: 42, port: '854' },
-            { id: 'ams', name: 'آمستردام، هلند', flag: '🇳🇱', basePing: 47, port: '884' },
-            { id: 'hel', name: 'هلسینکی، فنلاند', flag: '🇫🇮', basePing: 51, port: '908' },
-            { id: 'par', name: 'پاریس، فرانسه', flag: '🇫🇷', basePing: 55, port: '854' },
-            { id: 'ist', name: 'استانبول، ترکیه', flag: '🇹🇷', basePing: 36, port: '884' },
-            { id: 'dxb', name: 'دبی، امارات', flag: '🇦🇪', basePing: 28, port: '908' },
-        ];
-
-        function renderServerGrid() {
-            const grid = document.getElementById('server-ping-grid');
-            if (!grid) return;
-            grid.innerHTML = '';
-            SERVERS.forEach(s => {
-                const card = document.createElement('div');
-                card.id = `server-card-${s.id}`;
-                card.className = 'glass-panel p-4 rounded-2xl border border-white/5 text-center flex flex-col justify-between';
-                card.innerHTML = `
-                    <div>
-                        <div class="text-2xl mb-1">${s.flag}</div>
-                        <div class="text-xs font-bold text-white">${s.name}</div>
-                        <div class="text-[10px] text-gray-500 font-mono mt-0.5">Anycast :${s.port}</div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-white/5">
-                        <span id="ping-val-${s.id}" class="text-lg font-black font-mono text-theme">${s.basePing} ms</span>
-                        <div class="w-full bg-white/10 rounded-full h-1.5 mt-1.5 overflow-hidden">
-                            <div class="bg-theme h-full rounded-full" style="width: 85%;"></div>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        let isPingTesting = false;
-        function runPingSimulation() {
-            if (isPingTesting) return;
-            isPingTesting = true;
-            playSound('connect');
-            const btnText = document.getElementById('ping-btn-text');
-            const btnIcon = document.getElementById('ping-btn-icon');
-            if (btnText) btnText.textContent = 'در حال ارسال پکت‌های پایش...';
-            if (btnIcon) btnIcon.textContent = '⏳';
-
-            let count = 0;
-            const interval = setInterval(() => {
-                SERVERS.forEach(s => {
-                    const el = document.getElementById(`ping-val-${s.id}`);
-                    if (el) {
-                        const jitter = Math.floor(Math.random() * 8) - 4;
-                        const ping = Math.max(22, s.basePing + jitter);
-                        el.textContent = `${ping} ms`;
-                    }
-                });
-                count++;
-                if (count >= 6) {
-                    clearInterval(interval);
-                    isPingTesting = false;
-                    if (btnText) btnText.textContent = 'تست مجدد پینگ Anycast';
-                    if (btnIcon) btnIcon.textContent = '⚡';
-                    playSound('click');
-                    showToast('تست پینگ Anycast با موفقیت تکمیل شد');
-                }
-            }, 300);
-        }
-
-        // ==========================================
-        // 5. Phone App Simulator Logic
-        // ==========================================
-        let simConnected = false;
-        let simConnecting = false;
-        let simInterval = null;
-
-        function setSimOrientation(mode) {
-            const frame = document.getElementById('phone-frame');
-            const btnP = document.getElementById('sim-btn-portrait');
-            const btnL = document.getElementById('sim-btn-landscape');
-            playSound('click');
-
-            if (mode === 'landscape') {
-                frame.style.width = '640px';
-                frame.style.height = '350px';
-                btnL.className = 'px-5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-theme text-black transition-all';
-                btnP.className = 'px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-300 hover:text-white transition-all';
-                showToast('حالت چرخش افقی (Landscape) فعال شد');
-            } else {
-                frame.style.width = '340px';
-                frame.style.height = '680px';
-                btnP.className = 'px-5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-theme text-black transition-all';
-                btnL.className = 'px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-300 hover:text-white transition-all';
-                showToast('حالت عمودی (Portrait) فعال شد');
-            }
-        }
-
-        function toggleSimConnection() {
-            if (simConnecting) return;
-            const powerBtn = document.getElementById('sim-power-btn');
-            const powerIcon = document.getElementById('sim-power-icon');
-            const powerLabel = document.getElementById('sim-power-label');
-            const statusDot = document.getElementById('sim-status-dot');
-            const statusText = document.getElementById('sim-status-text');
-            const pingText = document.getElementById('sim-ping-text');
-            const speedText = document.getElementById('sim-speed-text');
-            const halo = document.getElementById('sim-halo');
-            const haloOuter = document.getElementById('sim-halo-outer');
-
-            if (simConnected) {
-                // Disconnect
-                simConnected = false;
-                clearInterval(simInterval);
-                powerIcon.className = 'w-12 h-12 text-gray-400 transition-colors duration-500';
-                powerIcon.style.color = '';
-                powerLabel.textContent = 'لمس برای اتصال';
-                statusDot.className = 'w-2 h-2 rounded-full bg-gray-500';
-                statusText.textContent = 'قطع ارتباط';
-                pingText.textContent = '-- ms';
-                speedText.textContent = '۰.۰ KB/s';
-                halo.className = 'absolute w-44 h-44 rounded-full border border-theme/20 transition-all duration-700 opacity-20';
-                haloOuter.className = 'absolute w-56 h-56 rounded-full border border-theme/10 transition-all duration-1000 opacity-10';
-                playSound('click');
-                showToast('اتصال شبیه‌ساز قطع شد');
-            } else {
-                // Connecting
-                simConnecting = true;
-                powerLabel.textContent = 'در حال کاوش...';
-                statusDot.className = 'w-2 h-2 rounded-full bg-amber-400 animate-ping';
-                statusText.textContent = 'اسکن رله‌های تمیز...';
-                halo.className = 'absolute w-44 h-44 rounded-full border border-theme animate-ping opacity-60';
-                haloOuter.className = 'absolute w-56 h-56 rounded-full border border-theme animate-pulse opacity-40';
-                playSound('connect');
-
-                setTimeout(() => {
-                    simConnecting = false;
-                    simConnected = true;
-                    powerIcon.className = 'w-12 h-12 transition-colors duration-500 drop-shadow';
-                    powerIcon.style.color = currentTheme.primary;
-                    powerLabel.textContent = 'متصل و ایمن';
-                    statusDot.className = 'w-2 h-2 rounded-full bg-green-400';
-                    statusText.textContent = 'اتصال برقرار است';
-                    pingText.textContent = '۴۴ ms';
-                    halo.className = 'absolute w-44 h-44 rounded-full border border-theme/60 transition-all duration-700 opacity-60 animate-pulse';
-                    haloOuter.className = 'absolute w-56 h-56 rounded-full border border-theme/30 transition-all duration-1000 opacity-30 animate-pulse';
-                    playSound('theme');
-                    showToast('اتصال با موفقیت برقرار شد');
-
-                    // Simulate speed counter
-                    simInterval = setInterval(() => {
-                        if (!simConnected) return;
-                        const speed = (Math.random() * 3.5 + 4.2).toFixed(1);
-                        speedText.textContent = `${speed} MB/s`;
-                    }, 800);
-                }, 1800);
-            }
-        }
-
-        // ==========================================
-        // 6. QR Code Generator & Modals
-        // ==========================================
+    <!-- ========================================== -->
+    <!-- 7. Fast Script Engine                      -->
+    <!-- ========================================== -->
+    <script>
         const DOWNLOAD_URL = "https://github.com/sinamp00/sina/releases/download/v3.6.3/SinaVPN-v3.6.3-Universal.apk";
+        const SHA256_HASH = "aa397bc6f5fb071cf730c16513dcff168c0df298c7538eaf4a77a9c4a22676e0";
 
-        function generateQRCodes() {
-            if (typeof QRCode === 'undefined') return;
-            const dlBox = document.getElementById('download-qr-box');
-            if (dlBox) {
-                dlBox.innerHTML = '';
-                new QRCode(dlBox, {
+        // Generate QR Code
+        (function initQR() {
+            const container = document.getElementById('qrcode-container');
+            if (container && typeof QRCode !== 'undefined') {
+                new QRCode(container, {
                     text: DOWNLOAD_URL,
                     width: 140,
                     height: 140,
-                    colorDark: "#06090e",
+                    colorDark: "#080B11",
                     colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.M
                 });
             }
+        })();
 
-            const modalBox = document.getElementById('modal-qr-box');
-            if (modalBox) {
-                modalBox.innerHTML = '';
-                new QRCode(modalBox, {
-                    text: DOWNLOAD_URL,
-                    width: 220,
-                    height: 220,
-                    colorDark: "#06090e",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H
-                });
-            }
-        }
-
-        function openQrModal() {
-            const modal = document.getElementById('qr-modal');
-            if (modal) modal.classList.remove('hidden');
-            playSound('click');
-        }
-        function closeQrModal() {
-            const modal = document.getElementById('qr-modal');
-            if (modal) modal.classList.add('hidden');
-            playSound('click');
-        }
-
-        // ==========================================
-        // 7. Clipboard Utilities & Toast
-        // ==========================================
-        function showToast(message) {
-            const toast = document.getElementById('toast-notification');
-            const msgEl = document.getElementById('toast-message');
-            if (!toast || !msgEl) return;
-            msgEl.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        function copyHash() {
-            const hash = "aa397bc6f5fb071cf730c16513dcff168c0df298c7538eaf4a77a9c4a22676e0";
-            navigator.clipboard.writeText(hash).then(() => {
-                playSound('click');
-                showToast("کد اصالت‌سنجی SHA-256 در حافظه کپی شد");
-            }).catch(() => {
-                showToast("خطا در کپی حافظه");
+        // Copy SHA256 Hash with Feedback
+        const btnCopy = document.getElementById('btn-copy-hash');
+        const hashText = document.getElementById('hash-text');
+        if (btnCopy) {
+            btnCopy.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(SHA256_HASH);
+                    hashText.textContent = "چک‌سام کپی شد ✓";
+                    btnCopy.style.borderColor = "#00F5A0";
+                    setTimeout(() => {
+                        hashText.textContent = "کپی چک‌سام SHA-256";
+                        btnCopy.style.borderColor = "";
+                    }, 2500);
+                } catch (e) {
+                    prompt("کد هش SHA-256 پکیج یونیورسال:", SHA256_HASH);
+                }
             });
         }
-
-        function copyDirectLink() {
-            navigator.clipboard.writeText(DOWNLOAD_URL).then(() => {
-                playSound('click');
-                showToast("لینک دانلود مستقیم در حافظه کپی شد");
-            }).catch(() => {
-                showToast("خطا در کپی لینک");
-            });
-        }
-
-        // ==========================================
-        // 8. Initialization
-        // ==========================================
-        document.addEventListener('DOMContentLoaded', () => {
-            renderThemeButtons();
-            renderServerGrid();
-            setTimeout(generateQRCodes, 300);
-        });
-        </script>
+    </script>
 </body>
 </html>
