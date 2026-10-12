@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>SinaVPN | اینترنت آزاد، خصوصی و بدون محدودیت</title>
+    <meta name="description" content="SinaVPN - فیلترشکن رایگان، بدون تبلیغات و بدون لاگ برای اندروید. دسترسی به اینترنت آزاد با ۵۰ گیگابایت ترافیک ماهانه موزیلا، پروتکل‌های پیشرفته ضد فیلترینگ و پکیج یکپارچه یونیورسال.">
+    <meta name="theme-color" content="#080b11">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" href="logo-transparent.png">
+    <link rel="shortcut icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+
+    <!-- Open Graph & Twitter -->
+    <meta property="og:title" content="SinaVPN - حریم خصوصی واقعی و اینترنت بدون سانسور">
+    <meta property="og:description" content="دانلود رایگان پکیج رسمی و یکپارچه یونیورسال SinaVPN برای تمامی گوشی‌های اندروید. ۵۰ گیگابایت ترافیک ابری موزیلا، بدون ثبت‌نام و بدون تبلیغات.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="logo.png">
+
+    <!-- Fonts: Vazirmatn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS (via official modern CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vazirmatn', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        wind: {
+                            base: '#080B11',
+                            surface: '#0F1523',
+                            card: '#141D30',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                            emerald: '#00F5A0',
+                            emeraldDark: '#05DF96',
+                            cyan: '#00D8F6',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- QR Code Generator -->
+    <script src="qrcode.min.js"></script>
+    <script>
+        if (typeof QRCode === 'undefined') {
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"><\/script>');
+        }
+    </script>
+
+    <style>
+        :root {
+            --emerald: #00F5A0;
+            --emerald-glow: rgba(0, 245, 160, 0.25);
+            --bg-dark: #080B11;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background-color: #080B11;
+            color: #E2E8F0;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(0, 245, 160, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 85% 25%, rgba(0, 216, 246, 0.04) 0%, transparent 45%);
+            background-attachment: fixed;
+        }
+
+        /* Windscribe Glassmorphism & Cards */
+        .wind-nav {
+            background: rgba(8, 11, 17, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .wind-card {
+            background: rgba(15, 21, 35, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .wind-card:hover {
+            border-color: rgba(0, 245, 160, 0.35);
+            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), 0 0 30px -5px rgba(0, 245, 160, 0.15);
+            transform: translateY(-3px);
+        }
+
+        /* Windscribe App Window Mockup */
+        .wind-app-mockup {
+            background: linear-gradient(180deg, #101726 0%, #0A0F1A 100%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 36px;
+            box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.9), 0 0 50px -10px rgba(0, 245, 160, 0.2);
+        }
+
+        /* Connection Orb Power Switch */
+        .power-orb {
+            background: radial-gradient(circle at 35% 30%, #1A2E28 0%, #0D1C17 70%, #07120E 100%);
+            border: 2px solid rgba(0, 245, 160, 0.4);
+            box-shadow: 0 0 35px rgba(0, 245, 160, 0.35), inset 0 0 20px rgba(0, 245, 160, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .power-orb:hover {
+            border-color: #00F5A0;
+            box-shadow: 0 0 50px rgba(0, 245, 160, 0.6), inset 0 0 25px rgba(0, 245, 160, 0.35);
+            transform: scale(1.03);
+        }
+
+        /* Windscribe Bold Buttons */
+        .btn-wind-primary {
+            background: #00F5A0;
+            color: #080B11;
+            font-weight: 800;
+            box-shadow: 0 4px 20px rgba(0, 245, 160, 0.35);
+            transition: transform 0.12s ease-out, box-shadow 0.15s ease-out;
+        }
+
+        .btn-wind-primary:hover {
+            box-shadow: 0 6px 28px rgba(0, 245, 160, 0.55);
+            transform: translateY(-1px);
+        }
+
+        .btn-wind-primary:active {
+            transform: scale(0.97);
+        }
+
+        .btn-wind-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.15s ease-out;
+        }
+
+        .btn-wind-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .btn-wind-secondary:active {
+            transform: scale(0.97);
+        }
+
+        /* Windscribe Tag Pill */
+        .wind-pill {
+            background: rgba(0, 245, 160, 0.08);
+            border: 1px solid rgba(0, 245, 160, 0.25);
+            color: #00F5A0;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080B11;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1C2638;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00F5A0;
+        }
+    </style>
+</head>
+<body class="selection:bg-emerald-500 selection:text-black">
+
+    <!-- ========================================== -->
+    <!-- 1. Windscribe Translucent Header Nav       -->
+    <!-- ========================================== -->
+    <header class="wind-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 h-18 py-3.5 flex items-center justify-between">
+            
+            <!-- Logo & Brand -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="logo-transparent.png" alt="SinaVPN Logo" class="w-10 h-10 object-contain drop-shadow-[0_0_12px_rgba(0,245,160,0.5)] transition-transform duration-300 group-hover:scale-105">
+                <div class="flex flex-col">
+                    <span class="text-lg font-black tracking-tight text-white group-hover:text-[#00F5A0] transition-colors">SinaVPN</span>
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Free & Unlimited</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-300">
+                <a href="#features" class="hover:text-[#00F5A0] transition-colors">قابلیت‌ها</a>
+                <a href="#why-sinavpn" class="hover:text-[#00F5A0] transition-colors">چرا سینا وی‌پی‌ان؟</a>
+                <a href="#install-guide" class="hover:text-[#00F5A0] transition-colors">راهنمای نصب</a>
+                <a href="https://github.com/sinamp00/SinaVPN/releases" target="_blank" rel="noopener noreferrer" class="hover:text-[#00F5A0] transition-colors">تاریخچه نسخه‌ها</a>
+            </nav>
+
+            <!-- Quick Action CTA -->
+            <div class="flex items-center gap-3">
+                <a href="#download" class="btn-wind-primary px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold flex items-center gap-2 shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    <span>دانلود آخرین نسخه</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-28 sm:pt-36">
+
+        <!-- ========================================== -->
+        <!-- 2. Windscribe-Style Hero Section           -->
+        <!-- ========================================== -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-8 pt-6 pb-24">
+            <div class="max-w-4xl mx-auto text-center space-y-7">
+                    
+                    <!-- Top Pill -->
+                    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full wind-pill text-xs font-bold shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-[#00F5A0] animate-pulse"></span>
+                        <span>جدیدترین نسخه رسمی منتشر شد • ۱۰۰٪ رایگان و بدون تبلیغ</span>
+                    </div>
+
+                    <!-- Main Catchy Title (Windscribe Vibe) -->
+                    <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight leading-[1.15]">
+                        اینترنت را همان‌گونه که باید باشد تجربه کنید: <span class="text-[#00F5A0]">آزاد، امن و بی‌پایان.</span>
+                    </h1>
+
+                    <!-- Punchy Subhead -->
+                    <p class="text-base sm:text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto font-normal">
+                        ردیاب‌ها را متوقف کنید، فیلترینگ شدید را پشت سر بگذارید و به وب آزاد بازگردید. با ۵۰ گیگابایت ترافیک ابری ماهانه موزیلا، رمزنگاری آفلاین و بدون نیاز به ثبت ایمیل یا شماره موبایل.
+                    </p>
+
+                    <!-- CTAs & Mirrors -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+                        <!-- Primary APK Download -->
+                        <a href="https://github.com/sinamp00/SinaVPN/releases/latest" class="btn-wind-primary w-full sm:w-auto px-8 py-4 rounded-2xl text-sm font-extrabold flex items-center justify-center gap-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            <span>دریافت مستقیم آخرین نسخه SinaVPN</span>
+                        </a>
+
+                        <!-- Telegram Mirror -->
+                        <a href="https://t.me/sinavpn_channel" target="_blank" rel="noopener noreferrer" class="btn-wind-secondary w-full sm:w-auto px-6 py-4 rounded-2xl text-sm font-bold flex items-center justify-center gap-2.5 text-blue-400 border-blue-500/20 hover:border-blue-500/40">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                            <span>دانلود از کانال تلگرام</span>
+                        </a>
+                    </div>
+
+                    <!-- Trust Points -->
+                    <div class="flex flex-wrap items-center justify-center gap-6 pt-3 text-xs text-gray-400 font-medium">
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-4 h-4 text-[#00F5A0]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            بدون نیاز به ثبت‌نام یا ایمیل
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-4 h-4 text-[#00F5A0]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            بدون تبلیغات آزاردهنده
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-4 h-4 text-[#00F5A0]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            سازگار با تمامی پردازنده‌ها
+                        </span>
+                    </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 3. Windscribe Value Pillars (Features)     -->
+        <!-- ========================================== -->
+        <section id="features" class="max-w-7xl mx-auto px-4 sm:px-8 py-20 border-t border-white/5">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs font-bold text-[#00F5A0] uppercase tracking-wider">سپر محافظ دیجیتال شما</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">فراتر از یک فیلترشکن معمولی</h2>
+                <p class="text-sm sm:text-base text-gray-400 mt-3 leading-relaxed">
+                    SinaVPN با ترکیب تکنولوژی‌های نوین تونل‌زنی، تجربه وب‌گردی آزاد و پایدار را برای کاربران در دشوارترین شرایط شبکه فراهم می‌آورد.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Pillar 1 -->
+                <div class="wind-card rounded-3xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-[#00F5A0]/10 flex items-center justify-center text-[#00F5A0] mb-5 border border-[#00F5A0]/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-white mb-2">حریم خصوصی واقعی</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                            هیچ لاگی از فعالیت‌ها یا وب‌سایت‌های بازدیدشده ذخیره نمی‌شود. احراز هویت با لایسنس رمزنگاری آفلاین در حافظه گوشی شما انجام می‌گیرد.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 text-[11px] text-[#00F5A0] font-mono">
+                        #NoLogsPolicy
+                    </div>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="wind-card rounded-3xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-5 border border-blue-500/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-white mb-2">رله ۵۰ گیگابایت موزیلا</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                            دسترسی مستقیم و ماهانه به ۵۰ گیگابایت ترافیک فوق‌سریع بر بستر لبه‌های ابری Fastly FPN با پل اختصاصی Netty برای یوتیوب و اینستاگرام.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 text-[11px] text-blue-400 font-mono">
+                        #MozillaCloudRelay
+                    </div>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="wind-card rounded-3xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-400 mb-5 border border-purple-500/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-white mb-2">ضد فیلترینگ چندلایه</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                            مجهز به پروتکل‌های فرار از بازرسی عمیق بسته‌ها (DPI) شامل Tactical MASQUE، WireGuard، و Shadowsocks WoW با سوییچ تطبیقی خودکار.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 text-[11px] text-purple-400 font-mono">
+                        #CensorshipResistant
+                    </div>
+                </div>
+
+                <!-- Pillar 4 -->
+                <div class="wind-card rounded-3xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-5 border border-amber-500/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-white mb-2">سبک و بدون تبلیغات</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                            هیچ ویدیوی تبلیغاتی یا تبلیغ پاپ‌آپ شما را آزار نمی‌دهد. طراحی تمیز، سبک و مصرف حداقل باتری روی تمامی گوشی‌های اندروید.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 text-[11px] text-amber-400 font-mono">
+                        #ZeroBloatware
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 4. Play Protect Installation Help Guide   -->
+        <!-- ========================================== -->
+        <section id="install-guide" class="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-white/5">
+            <div class="wind-card rounded-3xl p-8 sm:p-10">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
+                    <div>
+                        <span class="text-xs font-bold text-[#00F5A0] uppercase tracking-wider">راهنمای بدون دردسر</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">حل اخطار Google Play Protect هنگام نصب</h3>
+                    </div>
+                    <span class="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-gray-300">
+                        سریع و ۲ مرحله‌ای
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-sm text-gray-300">
+                    <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/5 flex gap-4 items-start">
+                        <div class="w-8 h-8 rounded-full bg-[#00F5A0]/20 text-[#00F5A0] font-black flex items-center justify-center shrink-0">۱</div>
+                        <div>
+                            <span class="font-bold text-white block mb-1">کلیک روی «جزئیات بیشتر» (More details)</span>
+                            <span class="text-xs text-gray-400 leading-relaxed">
+                                گوگل پلی به دلیل اینکه فایل خارج از استور دانلود شده اخطار احتیاطی می‌دهد. در کادر بازشده روی گزینه <strong class="text-white">More details</strong> یا «جزئیات بیشتر» بزنید.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/5 flex gap-4 items-start">
+                        <div class="w-8 h-8 rounded-full bg-[#00F5A0]/20 text-[#00F5A0] font-black flex items-center justify-center shrink-0">۲</div>
+                        <div>
+                            <span class="font-bold text-white block mb-1">انتخاب «نصب در هر حال» (Install anyway)</span>
+                            <span class="text-xs text-gray-400 leading-relaxed">
+                                روی دکمه <strong class="text-[#00F5A0]">Install anyway</strong> کلیک کنید تا اپلیکیشن بلافاصله نصب و آماده اتصال شود.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 5. Download Center (Universal Package)     -->
+        <!-- ========================================== -->
+        <section id="download" class="max-w-5xl mx-auto px-4 sm:px-8 py-20 border-t border-white/5">
+            <div class="wind-card rounded-3xl p-8 sm:p-12 relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                    
+                    <!-- Download Details -->
+                    <div class="lg:col-span-2 space-y-6 text-right">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full wind-pill text-xs font-bold">
+                            <span>پکیج رسمی یونیورسال اندروید</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">مرکز دریافت مستقیم اپلیکیشن</h2>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            این بسته جامع شامل کتابخانه‌های بهینه‌سازی‌شده برای تمامی پردازنده‌های ۶۴ بیتی و ۳۲ بیتی بوده و روی ۱۰۰٪ دستگاه‌های اندرویدی (اندروید ۶ تا ۱۵) کار می‌کند.
+                        </p>
+
+                        <!-- Specifications -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-xs text-gray-300">
+                            <div class="p-3.5 rounded-xl bg-white/5 border border-white/5">
+                                <span class="text-gray-400 block mb-0.5">نام فایل:</span>
+                                <span class="font-mono font-semibold text-white truncate block">SinaVPN-Universal.apk</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-white/5 border border-white/5">
+                                <span class="text-gray-400 block mb-0.5">معماری:</span>
+                                <span class="font-semibold text-white">All Archs (ARM & x86)</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-white/5 border border-white/5 col-span-2 sm:col-span-1">
+                                <span class="text-gray-400 block mb-0.5">سیستم‌عامل:</span>
+                                <span class="font-semibold text-white">Android 6.0+</span>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-4">
+                            <a href="https://github.com/sinamp00/SinaVPN/releases/latest" class="btn-wind-primary px-7 py-4 rounded-xl text-center text-sm font-bold flex items-center justify-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                <span>دانلود آخرین نسخه رسمی (گیت‌هاب)</span>
+                            </a>
+
+                            <a href="https://t.me/sinavpn_channel" target="_blank" rel="noopener noreferrer" class="btn-wind-secondary px-5 py-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                                <span>دریافت از کانال تلگرام</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- QR Code Widget -->
+                    <div class="flex flex-col items-center justify-center p-6 rounded-2xl bg-black/40 border border-white/5 text-center">
+                        <div class="bg-white p-3 rounded-xl shadow-lg mb-3" id="qrcode-container"></div>
+                        <span class="text-xs text-gray-400 font-medium">اسکن با دوربین جهت دانلود روی گوشی</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- 6. Windscribe Minimalist Clean Footer      -->
+    <!-- ========================================== -->
+    <footer class="border-t border-white/5 py-12 px-4 sm:px-8 text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5">
+            <div class="flex items-center gap-3">
+                <img src="logo-transparent.png" alt="SinaVPN" class="w-7 h-7 object-contain opacity-70">
+                <span>© ۲۰۲۶ SinaVPN. تمامی حقوق برای آزادی دسترسی به اینترنت محفوظ است.</span>
+            </div>
+            <div class="flex items-center gap-6 font-medium">
+                <a href="https://t.me/sinavpn_channel" target="_blank" rel="noopener noreferrer" class="hover:text-gray-300 transition-colors">کانال تلگرام</a>
+                <a href="https://github.com/sinamp00/SinaVPN" target="_blank" rel="noopener noreferrer" class="hover:text-gray-300 transition-colors">مخزن گیت‌هاب</a>
+                <a href="https://github.com/sinamp00/SinaVPN/releases/latest" target="_blank" rel="noopener noreferrer" class="hover:text-gray-300 transition-colors">آخرین انتشار رسمی</a>
+                <a href="version.json" target="_blank" class="hover:text-gray-300 transition-colors font-mono">version.json</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- 7. Fast Script Engine                      -->
+    <!-- ========================================== -->
+    <script>
+        const DOWNLOAD_URL = "https://github.com/sinamp00/SinaVPN/releases/latest";
+        const SHA256_HASH = "aa397bc6f5fb071cf730c16513dcff168c0df298c7538eaf4a77a9c4a22676e0";
+
+        // Generate QR Code
+        (function initQR() {
+            const container = document.getElementById('qrcode-container');
+            if (container && typeof QRCode !== 'undefined') {
+                new QRCode(container, {
+                    text: DOWNLOAD_URL,
+                    width: 140,
+                    height: 140,
+                    colorDark: "#080B11",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.M
+                });
+            }
+        })();
+
+        // Copy SHA256 Hash with Feedback
+        const btnCopy = document.getElementById('btn-copy-hash');
+        const hashText = document.getElementById('hash-text');
+        if (btnCopy) {
+            btnCopy.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(SHA256_HASH);
+                    hashText.textContent = "چک‌سام کپی شد ✓";
+                    btnCopy.style.borderColor = "#00F5A0";
+                    setTimeout(() => {
+                        hashText.textContent = "کپی چک‌سام SHA-256";
+                        btnCopy.style.borderColor = "";
+                    }, 2500);
+                } catch (e) {
+                    prompt("کد هش SHA-256 پکیج یونیورسال:", SHA256_HASH);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
