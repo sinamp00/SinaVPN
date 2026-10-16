@@ -1,1 +1,3 @@
-aa397bc6f5fb071cf730c16513dcff168c0df298c7538eaf4a77a9c4a22676e0  SinaVPN-v3.6.3-Universal.apk
+681e0dbf56cb1ef459bbbdcbca987e94956bdbdb03e058c4cfccd4a8b40d7bf3  SinaVPN-v3.6.9-Universal.apk
+cb7145e19c6c28a37b2fbb8b28fff6838d75c505ba6a5c1a65b4e357632e2d58  SinaVPN-v3.6.9-arm64-v8a.apk
+681e0dbf56cb1ef459bbbdcbca987e94956bdbdb03e058c4cfccd4a8b40d7bf3  universal.apk
