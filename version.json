@@ -1,8 +1,8 @@
 {
-  "version": "3.6.9",
-  "notes": "🛡️ آپدیت جامع SinaVPN نسخه ۳.۶.۹:\n• ارتقای معماری لایسنس به نسل دوم Sina-IronKey v2 با اولویت کامل کلید ادمین، انقضای روز مبدأ و مقاومت ۱۰۰٪ در برابر Clear Data\n• اصلاح کامل پایگاه‌های آپدیت درون‌برنامه‌ای و اتصال مستقیم به سرورهای رسمی SinaVPN\n• متقارن‌سازی ردیف دکمه‌های پایین صفحه (دکمه‌های ۵۴ دی‌پی آمار و تنظیمات در طرفین و کپسول پروتکل در مرکز)\n• تثبیت ارتفاع و حذف لغزش ناخواسته صفحه اصلی (داشبورد پایدار ColorOS 17)\n• بهینه‌سازی عملکرد موزیلا و ارائه همزمان پکیج‌های یونیورسال و ۶۴ بیتی اختصاصی",
-  "download_url": "https://github.com/sinamp00/SinaVPN/releases/download/v3.6.9/SinaVPN-v3.6.9-Universal.apk",
-  "download_url_arm64": "https://github.com/sinamp00/SinaVPN/releases/download/v3.6.9/SinaVPN-v3.6.9-arm64-v8a.apk",
-  "checksum": "bad7b693931ff294f56053c5b28336f2283c600d3b107edeb1e3c68008ad5f6d",
-  "checksum_arm64": "af0b257993ec37a3417ae52c5a2ea622d9e5bdec09471cc12bb4d5531927a4e4"
+  "version": "3.7.2",
+  "notes": "🛡️ آپدیت پایدار SinaVPN نسخه ۳.۷.۲:\n• بزرگ‌تر شدن و بهبود خوانایی نام پروتکل‌ها در صفحه اصلی\n• تم دو رنگ بارسلونا (آبی‌اناری) با استایل شیشه‌ای اختصاصی\n• بازطراحی کلیدهای سوییچ، تنظیمات و لیست کشورها\n• هماهنگی با پردازنده‌های ۶۴ و ۳۲ بیتی و پایداری شبکه در شرایط اختلال",
+  "download_url": "https://sinamp00.github.io/SinaVPN/SinaVPN-3.7.2-universal.apk",
+  "download_url_arm64": "https://sinamp00.github.io/SinaVPN/SinaVPN-3.7.2-arm64-v8a.apk",
+  "checksum": "8ba305b1acc74e3238339e15b5e8a70bd398f064bbb073a4d2c0cad0e6b3aca0",
+  "checksum_arm64": "d7ab0d454cf78eadf01353b3059b194dbb8a6499c8bb322a61586bef5cc73780"
 }
