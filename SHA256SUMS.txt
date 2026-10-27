@@ -1,2 +1,2 @@
-bf8f0bf7c1475ef2f1a5594634905feb777b797595a9f1b968b99cd459eb8ee1  SinaVPN-4.0.0-arm64-v8a.apk
-daba3fea3a98bb55352c1185d572def8d0110c2401c55e734156cc24721b9aee  SinaVPN-4.0.0-universal.apk
+0030e476554c64f35acceb1028a773cd283e920c1d9c4f29cf0d3f5c35af3c89  SinaVPN-4.0.0-arm64-v8a.apk
+1efc6b2a805474521ddd2f8a75ea22aeec428345af0f6cdda85efe648feb937b  SinaVPN-4.0.0-universal.apk
