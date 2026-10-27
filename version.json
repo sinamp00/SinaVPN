@@ -4,5 +4,6 @@
   "download_url": "https://sinamp00.github.io/SinaVPN/SinaVPN-4.0.0-universal.apk",
   "download_url_arm64": "https://sinamp00.github.io/SinaVPN/SinaVPN-4.0.0-arm64-v8a.apk",
   "checksum": "2e5d8228dcc27ebaac7fa4c364269c3236e2fae262f780e3e1b63cd0bd074238",
-  "checksum_arm64": "b5b4c937bac8e90b800e50c933157a1209a812172ba60ab9ab77a1445f483c48"
+  "checksum_arm64": "b5b4c937bac8e90b800e50c933157a1209a812172ba60ab9ab77a1445f483c48",
+  "version_code": 400
 }
